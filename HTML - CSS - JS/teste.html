@@ -19,8 +19,20 @@
             font-family: cursive;
         }
 
+        .tampando {
+            background-color: rgba(17, 8, 39, 1);
+            height: 100vh;
+            width: 59px;
+            position: fixed;
+        }
+
+        .displayFlexJustifyCenter {
+            display: flex;
+            justify-content: center;
+        }
+
         .jogoEnav {
-            background-color: rgba(17, 8, 39, 0.8);
+            background-color: rgba(17, 8, 39, 1);
             width: 70%;
             height: 100vh;
             display: flex;
@@ -30,14 +42,13 @@
         }
 
         .menu {
-            background-color: rgba(17, 8, 39, 0.8);
+            background-color: rgba(17, 8, 39, 1);
             height: 100vh;
             width: 30%;
 
         }
 
         .battlefield {
-
             background-image: url(public/imgs/fundo.gif);
             background-size: cover;
             height: 650px;
@@ -45,8 +56,6 @@
             border: solid;
             margin-right: -60px;
             border-color: white;
-            display: flex;
-            justify-content: center;
         }
 
         .navBar {
@@ -56,7 +65,7 @@
             margin-top: 50px;
             margin-right: -60px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
             color: white;
             font-size: 40px;
@@ -83,23 +92,21 @@
             /* background-color: rgba(128, 255, 212, 0.5); */
             width: 400px;
             height: 650px;
-            display: flex;
-            justify-content: center;
             position: absolute;
         }
 
         #personagem {
             height: 100px;
             width: 80px;
-            border: solid;
-            border-color: rgb(97, 40, 255);
+            /* border: solid;
+            border-color: rgb(97, 40, 255); */
             transition: 0.5s;
             margin: 275px 0px 0px 0px;
         }
 
         .obstaculo {
-            border: solid;
-            border-color: red;
+            /* border: solid;
+            border-color: red; */
             height: 140px;
             width: 80px;
         }
@@ -127,32 +134,48 @@
             flex-direction: column;
             justify-content: space-around;
         }
+
+        #start {
+        background-color: rgba(8, 5, 27, 0.8);
+        transition: 0.5s;
+        cursor: pointer;
+        width: 150px;
+        height: 60px;
+        border-radius: 10px;
+        }
+
+        #start:hover {
+        background-color: rgb(38, 28, 99);
+        }
     </style>
+
+    <div class="tampando"></div>
 
     <div class="jogoEnav">
 
         <div class="navBar">
-            <p>pontos: <span id="pontos"></span>
-
+            <p>pontos: 
+                <span id="pontos"></span>
             </p>
 
-            <p id="dificuldade"> dificuldade:
+
+            <!-- <p id="dificuldade"> dificuldade:
                 <select name="" id="valor_dificuldade">
                     <option value="facil">fácil</option>
                     <option value="normal">normal</option>
                     <option value="dificil">dificil</option>
                 </select>
-            </p>
+            </p> -->
 
-            <p id="start" onclick="começar()">
+            <p id="start" class="displayFlexJustifyCenter" onclick="começar()">
                 start
             </p>
 
         </div>
 
-        <div class="battlefield" id="battlefield">
+        <div class="battlefield displayFlexJustifyCenter" id="battlefield">
 
-            <div class="personagemArea" id="area">
+            <div class="personagemArea displayFlexJustifyCenter" id="area">
 
             </div>
 
@@ -202,23 +225,20 @@
     }
 
     var pontuação = 0;
-
+    
     function começar() {
-
+        
         pontuação = 0;
-
+        
         area.innerHTML = `<div id="personagem">
                             <img src="public/imgs/peixe.gif" style="width: 150px; margin: -30px 0px 0px -40px;">
                           </div>`
 
-
-
-        peixe.style.margin = '0px 0px 0px 1400px';
-        peixe.style.margin2 = '0px 0px 0px 1400px';
-        peixe.style.margin3 = '0px 0px 0px 1400px';
-
+        var peixesAndam = setInterval(peixinhos, 6000)
+                              
         // // PEIXE 1 CIMA
-        setInterval(() => {
+
+        function peixinhos() {
                 
                 peixe.style.margin = '0px 0px 0px 1400px'
             
@@ -226,10 +246,8 @@
                     peixe.style.margin = `0px 0px 0px -150px`
                 }, 3000);
 
-        }, 8000);
-
         // PEIXE 2 MEIO 
-        setInterval(() => {
+
 
             var dadoA2 = parseInt(Math.random() * 100);
             var dadoB2 = parseInt(Math.random() * 100);
@@ -244,11 +262,8 @@
                 }, 3000);
 
 
-        }, 6000);
+        // PEIXE 3 BAIXO
 
-
-
-        setInterval(() => {
 
             var dadoA3 = parseInt(Math.random() * 100);
             var dadoB3 = parseInt(Math.random() * 100);
@@ -265,13 +280,11 @@
                 }, 3000);
             }
 
-        }, 6000);
+        }
 
+        var intervaloHitboxes = setInterval(hitboxes, 1)
 
-
-
-
-        setInterval(() => {
+        function hitboxes() {
             var personagemHit = document.getElementById('personagem');
             var PhitLeft = personagemHit.getBoundingClientRect().left;
             var PhitRight = personagemHit.getBoundingClientRect().right;
@@ -307,12 +320,13 @@
 
                     area.innerHTML = ``;
                     pontos.innerHTML = pontuação;
-                     return;
+                    verdade = 0
+                    clearInterval(intervaloHitboxes);
+                    clearInterval(peixesAndam);
             }
 
             ;
-        }, 1);
-
+        }
 
     }
 
