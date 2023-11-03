@@ -29,15 +29,16 @@ body {
     width: 70%;
     border-radius: 20px;
     display: flex;
+    justify-content: center;
 }
 
 .personagemArea {
     background-color: rgba(128, 255, 212, 0.5);
     width: 400px;
-    height: 100%;
+    height: 700px;
     display: flex;
     justify-content: center;
-    
+    position: absolute;
 }
 
 #personagem {
@@ -52,28 +53,28 @@ body {
 #peixe {
     border: solid;
     border-color: red;
-    height: 20%;
+    height: 140px;
     width: 80px;
-    transition: 2s;
-    margin: 50px 0px 0px 928px;
+    transition: 3s;
+    margin: 50px 0px 0px 1400px;
 }
 
 #peixe2 {
     border: solid;
     border-color: red;
-    height: 20%;
+    height: 140px;
     width: 80px;
-    transition: 2s;
-    margin: 0px 0px 0px 928px;
+    transition: 3s;
+    margin: 0px 0px 0px 1400px;
 }
 
 #peixe3 {
     border: solid;
     border-color: red;
-    height: 20%;
+    height: 140px;
     width: 80px;
-    transition: 1s;
-    margin: 0px 0px 50px 928px;
+    transition: 2s;
+    margin: 0px 0px 50px 1400px;
 }
 
 #start {
@@ -124,7 +125,7 @@ body {
 
 <div class="tudo">
 
-    <button onclick="obstaculos()" id="start">START</button>
+    <button onclick="collision()" id="start">START</button>
 
     <div class="battlefield" id="battlefield">
 
@@ -135,9 +136,9 @@ body {
         </div>
 
     <div id="spawnArea">
-        <div id="spawnAleatorio"></div>
-        <div id="spawnAleatorio2"></div>
-        <div id="spawnAleatorio3"></div>
+        <div id="spawnAleatorio"><div class="obstaculo" id="peixe"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div></div>
+        <div id="spawnAleatorio2"><div class="obstaculo" id="peixe2"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div></div>
+        <div id="spawnAleatorio3"><div class="obstaculo" id="peixe3"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div></div>
     </div>
 
 
@@ -151,7 +152,6 @@ body {
 
 <script>
 var cima = 300;
-
 
       function andar(event) {
 
@@ -173,72 +173,71 @@ var cima = 300;
             
         }
 
+        // PEIXE 1 CIMA
         setInterval(() => {
-            spawnAleatorio.innerHTML = ''
 
-                if (spawnAleatorio.innerHTML == '') {
-                    var dado = parseInt(Math.random() * 100);
- 
-                    if (dado <= 75 ) {
-                        spawnAleatorio.innerHTML += `<div class="obstaculo" id="peixe"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"> </div>`
-                        peixe.style.margin = '50px 0px 0px 928px;'
-                        
-                        
-                    setTimeout(() => {
-                        peixe.style.margin= `0px 0px 0px -400px`
-                    }, 500);
+            peixe.style.margin = '50px 0px 0px 1400px'
+        
+            setTimeout(() => {
+                peixe.style.margin= `50px 0px 0px -150px`
+            }, 3000);
+            
+        }, 6000);
 
-                }
-                console.log(dado)
-
-                }
-    
-        }, 4000);
-
-
+        // PEIXE 2 MEIO 
         setInterval(() => {
-            spawnAleatorio2.innerHTML = ''
-
-                if (spawnAleatorio2.innerHTML == '') {
-                    var dado2 = parseInt(Math.random() * 100);
-                                 
-                    if (dado2 <= 75 ) {
-                        spawnAleatorio2.innerHTML += `<div class="obstaculo" id="peixe2"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"> </div>`
-                        peixe2.style.margin = '0px 0px 0px 928px;'
+                        
+            peixe2.style.margin = '0px 0px 0px 1400px'
                         
                         
-                    setTimeout(() => {
-                        peixe2.style.margin= `0px 0px 0px -400px`
-                    }, 100);
+            setTimeout(() => {
+                peixe2.style.margin= `0px 0px 0px -150px`
+            }, 3000);
 
-                }
-                console.log(dado2)
-                }
     
-        }, 3000);
+        }, 6000);
 
 
 
         setInterval(() => {
-            spawnAleatorio3.innerHTML = ''
 
-                if (spawnAleatorio3.innerHTML == '') {
-                    var dado3 = parseInt(Math.random() * 100);
-                                 
-                    if (dado3 <= 50 ) {
-                        spawnAleatorio3.innerHTML += `<div class="obstaculo" id="peixe3"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"> </div>`
-                        peixe3.style.margin = '0px 0px 50px 928px;'
+            peixe3.style.margin = '0px 0px 50px 1400px'
                         
                         
-                    setTimeout(() => {
-                        peixe3.style.margin= `0px 0px 0px -400px`
-                    }, 100);
-
-                }
-                console.log(dado3)
-                }
+            setTimeout(() => {
+                peixe3.style.margin= `0px 0px 50px -150px`
+            }, 3000);
     
-        }, 4000);
+        }, 6000);
+
+    //     HITBOXES:
+
+    setInterval(() => {
+var personagemHit = document.getElementById('personagem');
+var personagemBox = personagemHit.getBoundingClientRect();
+console.log(personagemBox)
+}, 100);
+
+
+        var topPlayer = personagemBox.offsetTop;
+        var leftPlayer = personagemHit.offsetLeft;
+
+        var inimigoHit = document.getElementById('peixe');
+        var topInimigo = inimigoHit.offsetTop;
+        var leftInimigo = inimigoHit.offsetLeft;
+    
+        if (leftPlayer + 100 >= leftInimigo &&
+            leftPlayer <= leftInimigo + 80 &&
+            topPlayer - 100 >= topInimigo + 140 &&
+            topPlayer - 100 <= topInimigo - 140) {
+
+                persoangem.innerHTML += `<div style='color: white;'>HITBOX</div>`
+            }
+
+
+        
+
+
         
 
 
