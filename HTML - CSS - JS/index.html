@@ -30,7 +30,6 @@
 
                         <div id="cliqueAqui">
                             <h1>Clique aqui para começar</h1>
-                            <h2 style="margin: -20px">Seu Highscore é:</h2>
                         </div>
 
 
@@ -46,7 +45,18 @@
     </div>
 
     
-    <div class="menu"></div>
+    <div class="menu">
+
+        <div class="informações displayFlexJustifyCenter" id="infos">
+            <h1>Leaderboard:</h1>
+        </div>
+
+        <div class="radar">
+            <img src="https://i.imgur.com/gehBsrS.gif" style="width: 350px;" alt="">
+        </div>
+
+
+    </div>
 
 
 </body>
@@ -153,9 +163,9 @@
 
 
             spawnAleatorio.innerHTML = `
-        <div class="obstaculo" id="peixe" style="margin: 0px 0px 0px ${margem_peixe1}px;"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div>
-        <div class="obstaculo" id="peixe2" style="margin: 0px 0px 0px ${margem_peixe2}px;"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div>
-        <div class="obstaculo" id="peixe3" style="margin: 0px 0px 0px ${margem_peixe3}px;"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe" style="margin: 0px 0px 0px ${margem_peixe1}px;"> <img src="bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe2" style="margin: 0px 0px 0px ${margem_peixe2}px;"> <img src="bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe3" style="margin: 0px 0px 0px ${margem_peixe3}px;"> <img src="bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
         `
 
             peixe.style.transition = '3s'
@@ -180,7 +190,6 @@
                     }
                     else {
                         peixe.style.transition = '0s'
-                        peixe.style.transform = 'scaleX(-1)'
                         peixe.style.transition = '3s'
                         peixe.style.margin = '0px 0px 0px 1250px'
                     }
@@ -199,9 +208,6 @@
                     peixe2.style.margin = '0px 0px 0px -150px'
                 }
                 else {
-                    peixe2.style.transition = 'all 0s ease 0s'
-                    peixe2.style.transform = 'scaleX(-1)'
-                    peixe2.style.transition = 'all 3s ease 0s'
                     peixe2.style.margin = '0px 0px 0px 1250px'
                 }
 
@@ -218,7 +224,6 @@
                         peixe3.style.margin = '0px 0px 0px -150px'
                     }
                     else {
-                        peixe3.style.transform = 'scaleX(-1)'
                         peixe3.style.margin = '0px 0px 0px 1250px'
                     }
 

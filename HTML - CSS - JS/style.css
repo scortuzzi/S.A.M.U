@@ -28,7 +28,26 @@
             background-color: rgba(0, 0, 0, 0.9);
             height: 100vh;
             width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+            align-items: center;
+            color: white;
+        }
 
+        .radar {
+            border: solid;
+            border-color: white;
+            margin-bottom: 29px;
+        }
+
+        .informações {
+            margin-top: 29px;
+            width: 350px;
+            height: 50%;
+            background-color: rgba(0, 50, 25, 0.1);
+            border-radius: 10px;
         }
 
         .battlefield {
@@ -80,10 +99,21 @@
         #personagem {
             height: 100px;
             width: 80px;
-
             transition: 0.5s;
             margin: 280px 0px 0px 0px;
+            border-radius: 50%;
+            box-shadow: 0px 10px 100px rgb(255, 255, 201);
+            animation-name: submarino;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-delay: 2s;
         }
+
+        @keyframes submarino{
+            from {transform: (-0.10turn);}
+            to {transform: rotate(-0.02turn);}
+            }
 
         .obstaculo {
             height: 140px;
@@ -124,3 +154,5 @@
             justify-content: center;
             align-items: center;
         }
+
+
