@@ -21,8 +21,8 @@
 
         .tampando {
             background-color: rgba(17, 8, 39, 1);
-            height: 100vh;
-            width: 59px;
+            height: 100px;
+            width: 6.7%;
             position: fixed;
         }
 
@@ -38,7 +38,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
-            align-items: center;
+            align-items: end;
         }
 
         .menu {
@@ -49,21 +49,19 @@
         }
 
         .battlefield {
-            background-image: url(public/imgs/fundo.gif);
+            background-image: url(fundo.gif);
             background-size: cover;
             height: 650px;
-            width: 95%;
+            width: 90%;
             border: solid;
-            margin-right: -60px;
             border-color: white;
         }
 
         .navBar {
-            background-color: rgba(128, 255, 212, 0);
-            width: 95%;
+            /* background-color: rgba(128, 255, 212, 1); */
+            width: 90.5%;
             height: 100px;
             margin-top: 50px;
-            margin-right: -60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -89,7 +87,7 @@
         }
 
         .personagemArea {
-            /* background-color: rgba(128, 255, 212, 0.5); */
+            /* background-color: rgba(128, 255, 212, 0.2); */
             width: 400px;
             height: 650px;
             position: absolute;
@@ -98,36 +96,33 @@
         #personagem {
             height: 100px;
             width: 80px;
-            /* border: solid;
-            border-color: rgb(97, 40, 255); */
+
             transition: 0.5s;
             margin: 275px 0px 0px 0px;
         }
 
         .obstaculo {
-            /* border: solid;
-            border-color: red; */
             height: 140px;
             width: 80px;
         }
 
         #peixe {
-            transition: 2s;
-            margin: 0px 0px 0px 1400px;
+            transition: 4s;
+            margin: 0px 0px 0px 1250px;
         }
 
         #peixe2 {
-            transition: 3s;
-            margin: 0px 0px 0px 1400px;
+            transition: 4s;
+            margin: 0px 0px 0px 1250px;
         }
 
         #peixe3 {
-            transition: 2s;
-            margin: 0px 0px 0px 1400px;
+            transition: 4s;
+            margin: 0px 0px 0px 1250px;
         }
 
         #spawnAleatorio {
-            background-color: rgba(18, 16, 51, 0.6);
+            background-color: rgba(18, 16, 51, 0.5);
             width: 100%;
             height: 100%;
             display: flex;
@@ -136,16 +131,16 @@
         }
 
         #start {
-        background-color: rgba(8, 5, 27, 0.8);
-        transition: 0.5s;
-        cursor: pointer;
-        width: 150px;
-        height: 60px;
-        border-radius: 10px;
+            background-color: rgba(8, 5, 27, 0.8);
+            transition: 0.5s;
+            cursor: pointer;
+            width: 150px;
+            height: 60px;
+            border-radius: 10px;
         }
 
         #start:hover {
-        background-color: rgb(38, 28, 99);
+            background-color: rgb(38, 28, 99);
         }
     </style>
 
@@ -154,7 +149,7 @@
     <div class="jogoEnav">
 
         <div class="navBar">
-            <p>pontos: 
+            <p>pontos:
                 <span id="pontos"></span>
             </p>
 
@@ -180,14 +175,8 @@
             </div>
 
 
-            <div id="spawnAleatorio">
-                <div class="obstaculo" id="peixe"> <img src="public/imgs/anglerfish.gif"
-                        style="width: 200px; margin: -10px 0px 0px -70px;"></div>
-                <div class="obstaculo" id="peixe2"> <img src="public/imgs/anglerfish.gif"
-                        style="width: 200px; margin: -10px 0px 0px -70px;"></div>
-                <div class="obstaculo" id="peixe3"> <img src="public/imgs/anglerfish.gif"
-                        style="width: 200px; margin: -10px 0px 0px -70px;"></div>
-            </div>
+            <div id="spawnAleatorio"></div>
+
         </div>
     </div>
 
@@ -201,7 +190,8 @@
 <script>
 
 
-    // MOVIMENTO
+    // MOVIMENTO do personagem
+
     var cima = 275;
 
     function andar(event) {
@@ -225,128 +215,220 @@
     }
 
     var pontuação = 0;
-    
+
+
+    // Função que começa quando o usuario apertar o botão "start", o jogo inteiro só começa quando esta função for iniciada
     function começar() {
-        
+
+        // quando o jogo iniciar, a variavel pontuação é criada e ela sempre começa em zero
         pontuação = 0;
-        
+
+        // spawna o player no meio da tela, quando ele começar a existir o jogador pode assumir o controle do personagem
         area.innerHTML = `<div id="personagem">
-                            <img src="public/imgs/peixe.gif" style="width: 150px; margin: -30px 0px 0px -40px;">
+                            <img src="sub.png" style="width: 150px; margin: -30px 0px 0px -40px;">
                           </div>`
 
-        var peixesAndam = setInterval(peixinhos, 6000)
-                              
-        // // PEIXE 1 CIMA
 
-        function peixinhos() {
-                
-                peixe.style.margin = '0px 0px 0px 1400px'
-            
-                setTimeout(() => {
-                    peixe.style.margin = `0px 0px 0px -150px`
-                }, 3000);
+        // Spawn dos inimigos abaixo
 
-        // PEIXE 2 MEIO 
+        var SpawnDePeixesIntervalo = setInterval(spawnarPeixes, 4000) // diz que a função de spawn é executada a cada 6 segundos
+
+        function spawnarPeixes() {
 
 
-            var dadoA2 = parseInt(Math.random() * 100);
-            var dadoB2 = parseInt(Math.random() * 100);
+            var dado = Math.floor(Math.random() * 101); // função que randomiza o spawn dos peixes, o valor do dado determinada a posição em cada cada um spawna
+            var margem_peixe1 = 1250;
+            var margem_peixe2 = 1250;
+            var margem_peixe3 = 1250;
 
-            if (dadoA2 <= 75) {
-                peixe2.style.margin = '0px 0px 0px 1400px'
+            var o_peixe1_vai_andar = 0;
+            var o_peixe2_vai_andar = 0;
+            var o_peixe3_vai_andar = 0;
 
+            // Spawna o peixe(2) do meio na esquerda
+            if (dado <= 20) {
+                margem_peixe2 = -150;
+
+                o_peixe2_vai_andar = 1;
             }
 
-                setTimeout(() => {
-                    peixe2.style.margin = `0px 0px 0px -150px`
-                }, 3000);
+            // Spawna os peixes de cima(1) e de baixo(3) na esquerda
+            else if (dado > 20 && dado <= 40) {
+                margem_peixe1 = -150;
+                margem_peixe3 = -150;
 
-
-        // PEIXE 3 BAIXO
-
-
-            var dadoA3 = parseInt(Math.random() * 100);
-            var dadoB3 = parseInt(Math.random() * 100);
-
-            if (dadoA3 <= 75) {
-
-                peixe3.style.margin = '0px 0px 0px 1400px'
-
+                o_peixe1_vai_andar = 1;
+                o_peixe2_vai_andar = 1;
             }
 
-            if (dadoB3 <= 75) {
-                setTimeout(() => {
-                    peixe3.style.margin = `0px 0px 0px -150px`
-                }, 3000);
+            // Spawna o peixe de baixo(3) na esquerda
+            else if (dado > 40 && dado <= 60) {
+                margem_peixe3 = -150;
+
+                o_peixe3_vai_andar = 2;
             }
+
+            // Spawna o peixe de cima(1) na esquerda -- o peixe de cima não anda
+            else if (dado > 60 && dado <= 80) {
+                margem_peixe1 = -150;
+
+                o_peixe1_vai_andar = 2;
+            }
+
+
+            // Spawna o peixe de cima(1) e o do meio(2) na esquerda -- o de baixo não anda
+            else {
+                margem_peixe1 = -150;
+                margem_peixe2 = -150;
+
+                o_peixe3_vai_andar = 2; 
+            }
+
+
+
+
+            spawnAleatorio.innerHTML = `
+        <div class="obstaculo" id="peixe" style="margin: 0px 0px 0px ${margem_peixe1}px;"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe2" style="margin: 0px 0px 0px ${margem_peixe2}px;"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe3" style="margin: 0px 0px 0px ${margem_peixe3}px;"> <img src="anglerfish.gif" style="width: 200px; margin: -10px 0px 0px -70px;"></div>
+        `
+
+            peixe.style.transition = '3s'
+            peixe2.style.transition = '3s'
+            peixe3.style.transition = '3s'
+
+            // código que mexe os peixes de um lado para o outro, aqui pergunta se ele ta do lado direito primeiro,
+            // se estiver, ele manda o peixe pro lado esquerdo, caso não esteja (isso significa que ele já está do lado esquerdo),
+            // ele simplesmente joga o peixe para o lado direito
+
+            setTimeout(() => {
+
+                // Peixe 1
+
+                if (o_peixe1_vai_andar == 1) {
+                    peixe.style.transition = '4s'
+                }
+
+                if (o_peixe1_vai_andar != 2) {
+                    if (peixe.style.margin == '0px 0px 0px 1250px') {
+                        peixe.style.margin = '0px 0px 0px -150px'
+                    }
+                    else {
+                        peixe.style.transform = 'scaleX(-1)'
+                        peixe.style.margin = '0px 0px 0px 1250px'
+                    }
+
+                }
+
+
+                // Peixe 2
+
+                if (o_peixe2_vai_andar == 1) {
+                    peixe2.style.transition = '4s'
+                    peixe3.style.transition = '2s'
+                }
+
+                if (peixe2.style.margin == '0px 0px 0px 1250px') {
+                    peixe2.style.margin = '0px 0px 0px -150px'
+                }
+                else {
+                    peixe2.style.transform = 'scaleX(-1)'
+                    peixe2.style.margin = '0px 0px 0px 1250px'
+                }
+
+
+                // Peixe 3
+
+                if (o_peixe3_vai_andar == 1) {
+                    peixe3.style.transition = '4s'
+                }
+
+
+                if (o_peixe3_vai_andar != 2) {
+                    if (peixe3.style.margin == '0px 0px 0px 1250px') {
+                        peixe3.style.margin = '0px 0px 0px -150px'
+                    }
+                    else {
+                        peixe3.style.transform = 'scaleX(-1)'
+                        peixe3.style.margin = '0px 0px 0px 1250px'
+                    }
+
+                }
+            }, 1000);
 
         }
+
+
+
+
+
+        // aumento repetitivo de pontuação: A cada 0.1 segundos, a pontuação aumenta em 1, ela para de contar quando o jogador for atingido
+
+        var aumentoDePontos = setInterval(Scores, 85)
+
+        function Scores() {
+            pontuação += 1;
+            pontos.innerHTML = pontuação;
+        }
+
+
+        // código de Hitbox, esse código é executado a cada 1 milésimo (0.01s)
+        // ele pega exatamente a posição exata da escala X e Y na esquerda, direita
+        // de cada inimigo e do próprio personagem
 
         var intervaloHitboxes = setInterval(hitboxes, 1)
 
         function hitboxes() {
-            var personagemHit = document.getElementById('personagem');
-            var PhitLeft = personagemHit.getBoundingClientRect().left;
-            var PhitRight = personagemHit.getBoundingClientRect().right;
-            var PhitTop = personagemHit.getBoundingClientRect().top;
-            var PhitBottom = personagemHit.getBoundingClientRect().bottom
+            if (spawnAleatorio.innerHTML != "") {
+                var personagemHit = document.getElementById('personagem');
+                var PhitLeft = personagemHit.getBoundingClientRect().left;
+                var PhitRight = personagemHit.getBoundingClientRect().right;
+                var PhitTop = personagemHit.getBoundingClientRect().top;
+                var PhitBottom = personagemHit.getBoundingClientRect().bottom
 
-            var inimigoHit = document.getElementById('peixe');
-            var EhitLeft = inimigoHit.getBoundingClientRect().left;
-            var EhitRight = inimigoHit.getBoundingClientRect().right;
-            var EhitTop = inimigoHit.getBoundingClientRect().top;
-            var EhitBottom = inimigoHit.getBoundingClientRect().bottom;
+                var inimigoHit = document.getElementById('peixe');
+                var EhitLeft = inimigoHit.getBoundingClientRect().left;
+                var EhitRight = inimigoHit.getBoundingClientRect().right;
+                var EhitTop = inimigoHit.getBoundingClientRect().top;
+                var EhitBottom = inimigoHit.getBoundingClientRect().bottom;
 
-            var inimigoHit2 = document.getElementById('peixe2');
-            var EhitLeft2 = inimigoHit2.getBoundingClientRect().left;
-            var EhitRight2 = inimigoHit2.getBoundingClientRect().right;
-            var EhitTop2 = inimigoHit2.getBoundingClientRect().top;
-            var EhitBottom2 = inimigoHit2.getBoundingClientRect().bottom;
+                var inimigoHit2 = document.getElementById('peixe2');
+                var EhitLeft2 = inimigoHit2.getBoundingClientRect().left;
+                var EhitRight2 = inimigoHit2.getBoundingClientRect().right;
+                var EhitTop2 = inimigoHit2.getBoundingClientRect().top;
+                var EhitBottom2 = inimigoHit2.getBoundingClientRect().bottom;
 
-            var inimigoHit3 = document.getElementById('peixe3');
-            var EhitLeft3 = inimigoHit3.getBoundingClientRect().left;
-            var EhitRight3 = inimigoHit3.getBoundingClientRect().right;
-            var EhitTop3 = inimigoHit3.getBoundingClientRect().top;
-            var EhitBottom3 = inimigoHit3.getBoundingClientRect().bottom;
+                var inimigoHit3 = document.getElementById('peixe3');
+                var EhitLeft3 = inimigoHit3.getBoundingClientRect().left;
+                var EhitRight3 = inimigoHit3.getBoundingClientRect().right;
+                var EhitTop3 = inimigoHit3.getBoundingClientRect().top;
+                var EhitBottom3 = inimigoHit3.getBoundingClientRect().bottom;
 
 
-                pontuação += 1;
-                pontos.innerHTML = pontuação
-          
 
-            if ((PhitRight >= EhitLeft && PhitLeft <= EhitRight && PhitTop <= EhitBottom && PhitBottom >= EhitTop)
-                || (PhitRight >= EhitLeft2 && PhitLeft <= EhitRight2 && PhitTop <= EhitBottom2 && PhitBottom >= EhitTop2)
-                || (PhitRight >= EhitLeft3 && PhitLeft <= EhitRight3 && PhitTop <= EhitBottom3 && PhitBottom >= EhitTop3)) {
+                // "if" utilizado para saber quando houve uma colisão entre o jogador e um inimigo,
+                // se qualquer uma das escalas X ou Y de cada canto de cada elemento dentro da tela colidir
+                // este if será ativado, e ele faz as seguinte ações:
+
+                // tira o personagem da tela
+                // crava sua pontuação na tela
+                // para de executar o código de Hitbox, de aumento de pontos e da movimentação de inimigos
+
+                if ((PhitRight >= EhitLeft && PhitLeft <= EhitRight && PhitTop <= EhitBottom && PhitBottom >= EhitTop)
+                    || (PhitRight >= EhitLeft2 && PhitLeft <= EhitRight2 && PhitTop <= EhitBottom2 && PhitBottom >= EhitTop2)
+                    || (PhitRight >= EhitLeft3 && PhitLeft <= EhitRight3 && PhitTop <= EhitBottom3 && PhitBottom >= EhitTop3)) {
 
                     area.innerHTML = ``;
                     pontos.innerHTML = pontuação;
-                    verdade = 0
                     clearInterval(intervaloHitboxes);
-                    clearInterval(peixesAndam);
-            }
+                    clearInterval(aumentoDePontos);
+                    clearInterval(SpawnDePeixesIntervalo);
 
-            ;
+                }
+            }
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
