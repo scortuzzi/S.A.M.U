@@ -5,189 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>teste</title>
+    <link href="https://fonts.cdnfonts.com/css/prudencia" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+                
 
 </head>
 
 <body onkeydown="andar(event)">
 
-    <style>
-        body {
-            margin: 0;
-            background-image: url('https://app.anomuragame.com/img/anomura-bg_undersea.gif');
-            background-size: cover;
-            display: flex;
-            font-family: cursive;
-        }
-
-        .tampando {
-            background-color: rgba(17, 8, 39, 1);
-            height: 100px;
-            width: 6.7%;
-            position: fixed;
-        }
-
-        .displayFlexJustifyCenter {
-            display: flex;
-            justify-content: center;
-        }
-
-        .jogoEnav {
-            background-color: rgba(17, 8, 39, 1);
-            width: 70%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: end;
-        }
-
-        .menu {
-            background-color: rgba(17, 8, 39, 1);
-            height: 100vh;
-            width: 30%;
-
-        }
-
-        .battlefield {
-            background-image: url(fundo.gif);
-            background-size: cover;
-            height: 650px;
-            width: 90%;
-            border: solid;
-            border-color: white;
-        }
-
-        .navBar {
-            /* background-color: rgba(128, 255, 212, 1); */
-            width: 90.5%;
-            height: 100px;
-            margin-top: 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            font-size: 40px;
-
-        }
-
-        #valor_dificuldade {
-            background-color: rgba(0, 0, 0, 0);
-            color: white;
-            font-family: cursive;
-            font-size: 30px;
-            border: solid;
-            border-color: white;
-
-        }
-
-        #valor_dificuldade option {
-            background-color: rgba(0, 0, 0, 0);
-            color: black;
-
-        }
-
-        .personagemArea {
-            /* background-color: rgba(128, 255, 212, 0.2); */
-            width: 400px;
-            height: 650px;
-            position: absolute;
-        }
-
-        #personagem {
-            height: 100px;
-            width: 80px;
-
-            transition: 0.5s;
-            margin: 275px 0px 0px 0px;
-        }
-
-        .obstaculo {
-            height: 140px;
-            width: 80px;
-        }
-
-        #peixe {
-            transition: 4s;
-            margin: 0px 0px 0px 1250px;
-        }
-
-        #peixe2 {
-            transition: 4s;
-            margin: 0px 0px 0px 1250px;
-        }
-
-        #peixe3 {
-            transition: 4s;
-            margin: 0px 0px 0px 1250px;
-        }
-
-        #spawnAleatorio {
-            background-color: rgba(18, 16, 51, 0.5);
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        #start {
-            background-color: rgba(8, 5, 27, 0.8);
-            transition: 0.5s;
-            cursor: pointer;
-            width: 150px;
-            height: 60px;
-            border-radius: 10px;
-        }
-
-        #start:hover {
-            background-color: rgb(38, 28, 99);
-        }
-    </style>
-
     <div class="tampando"></div>
 
     <div class="jogoEnav">
 
-        <div class="navBar">
-            <p>pontos:
-                <span id="pontos"></span>
-            </p>
+                <div class="navBar">
+                    <p>pontos:
+                        <span id="pontos"></span>
+                    </p>
+                </div>
+            
+                <div class="battlefield displayFlexJustifyCenter" id="battlefield" onclick="começar()"> <!-- lugar de jogo -->
+
+                    
+                    <div class="personagemArea displayFlexJustifyCenter" id="area">
+
+                        <div id="cliqueAqui">
+                            <h1>Clique aqui para começar</h1>
+                            <h2 style="margin: -20px">Seu Highscore é:</h2>
+                        </div>
 
 
-            <!-- <p id="dificuldade"> dificuldade:
-                <select name="" id="valor_dificuldade">
-                    <option value="facil">fácil</option>
-                    <option value="normal">normal</option>
-                    <option value="dificil">dificil</option>
-                </select>
-            </p> -->
+                    </div> <!-- area do personagem, fica no meio do battlefield-->
+                    
+                   
 
-            <p id="start" class="displayFlexJustifyCenter" onclick="começar()">
-                start
-            </p>
-
-        </div>
-
-        <div class="battlefield displayFlexJustifyCenter" id="battlefield">
-
-            <div class="personagemArea displayFlexJustifyCenter" id="area">
-
-            </div>
-
-
-            <div id="spawnAleatorio"></div>
-
-        </div>
+                
+                    <div id="spawnAleatorio"></div>
+                
+                </div>
+   
     </div>
 
+    
     <div class="menu"></div>
 
 
 </body>
-
 </html>
 
 <script>
+
+        var listaPontos = [];
 
 
     // MOVIMENTO do personagem
@@ -224,9 +91,7 @@
         pontuação = 0;
 
         // spawna o player no meio da tela, quando ele começar a existir o jogador pode assumir o controle do personagem
-        area.innerHTML = `<div id="personagem">
-                            <img src="sub.png" style="width: 150px; margin: -30px 0px 0px -40px;">
-                          </div>`
+        area.innerHTML = `<div id="personagem"><img src="sub.png" style="width: 150px; margin: -30px 0px 0px -40px;"></div>`
 
 
         // Spawn dos inimigos abaixo
@@ -314,7 +179,9 @@
                         peixe.style.margin = '0px 0px 0px -150px'
                     }
                     else {
+                        peixe.style.transition = '0s'
                         peixe.style.transform = 'scaleX(-1)'
+                        peixe.style.transition = '3s'
                         peixe.style.margin = '0px 0px 0px 1250px'
                     }
 
@@ -332,7 +199,9 @@
                     peixe2.style.margin = '0px 0px 0px -150px'
                 }
                 else {
+                    peixe2.style.transition = 'all 0s ease 0s'
                     peixe2.style.transform = 'scaleX(-1)'
+                    peixe2.style.transition = 'all 3s ease 0s'
                     peixe2.style.margin = '0px 0px 0px 1250px'
                 }
 
@@ -357,10 +226,6 @@
             }, 1000);
 
         }
-
-
-
-
 
         // aumento repetitivo de pontuação: A cada 0.1 segundos, a pontuação aumenta em 1, ela para de contar quando o jogador for atingido
 
@@ -418,12 +283,27 @@
                     || (PhitRight >= EhitLeft2 && PhitLeft <= EhitRight2 && PhitTop <= EhitBottom2 && PhitBottom >= EhitTop2)
                     || (PhitRight >= EhitLeft3 && PhitLeft <= EhitRight3 && PhitTop <= EhitBottom3 && PhitBottom >= EhitTop3)) {
 
-                    area.innerHTML = ``;
-                    pontos.innerHTML = pontuação;
-                    clearInterval(intervaloHitboxes);
-                    clearInterval(aumentoDePontos);
-                    clearInterval(SpawnDePeixesIntervalo);
+                        clearInterval(aumentoDePontos); //para o aumento de pontos
+                        listaPontos.push(pontuação); //joga sua pontuação dentro da array
+                        var highscore = listaPontos[0];
+                        pontos.innerHTML = pontuação; //crava quantos pontos você fez na tela
 
+                    for (posicao = 1; posicao < listaPontos.length; posicao += 1) {
+                        if (listaPontos[posicao] > listaPontos[posicao - 1]) {
+                            highscore = listaPontos[posicao]
+                        }
+                    }    
+
+                    //exibe a mensagem de morte na tela:
+                    area.innerHTML = `
+                        <div id="cliqueAqui">
+                            <h1>Você Morreu</h1>
+                            <h2 style="margin: -20px">Seu Highscore é: ${highscore}</h2>
+                        </div>
+                        `;
+                        
+                    clearInterval(intervaloHitboxes); //para o fluxo de hitboxes
+                    clearInterval(SpawnDePeixesIntervalo); //para o spawn de peixes
                 }
             }
         }
