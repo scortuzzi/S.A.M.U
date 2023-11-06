@@ -243,7 +243,7 @@
 
 
         // código de Hitbox, esse código é executado a cada 1 milésimo (0.01s)
-        // ele pega exatamente a posição exata da escala X e Y na esquerda, direita
+        // ele pega exatamente a posição exata da escala X e Y
         // de cada inimigo e do próprio personagem
 
         var intervaloHitboxes = setInterval(hitboxes, 1)
@@ -251,30 +251,17 @@
         function hitboxes() {
             if (spawnAleatorio.innerHTML != "") {
                 var personagemHit = document.getElementById('personagem');
-                var PhitLeft = personagemHit.getBoundingClientRect().left;
-                var PhitRight = personagemHit.getBoundingClientRect().right;
-                var PhitTop = personagemHit.getBoundingClientRect().top;
-                var PhitBottom = personagemHit.getBoundingClientRect().bottom
+                var hitboxP = personagemHit.getBoundingClientRect();
 
-                var inimigoHit = document.getElementById('peixe');
-                var EhitLeft = inimigoHit.getBoundingClientRect().left;
-                var EhitRight = inimigoHit.getBoundingClientRect().right;
-                var EhitTop = inimigoHit.getBoundingClientRect().top;
-                var EhitBottom = inimigoHit.getBoundingClientRect().bottom;
+                var peixe1Hit = document.getElementById('peixe');
+                var peixe1Hitbox = peixe1Hit.getBoundingClientRect()
 
-                var inimigoHit2 = document.getElementById('peixe2');
-                var EhitLeft2 = inimigoHit2.getBoundingClientRect().left;
-                var EhitRight2 = inimigoHit2.getBoundingClientRect().right;
-                var EhitTop2 = inimigoHit2.getBoundingClientRect().top;
-                var EhitBottom2 = inimigoHit2.getBoundingClientRect().bottom;
-
-                var inimigoHit3 = document.getElementById('peixe3');
-                var EhitLeft3 = inimigoHit3.getBoundingClientRect().left;
-                var EhitRight3 = inimigoHit3.getBoundingClientRect().right;
-                var EhitTop3 = inimigoHit3.getBoundingClientRect().top;
-                var EhitBottom3 = inimigoHit3.getBoundingClientRect().bottom;
+                var peixe2Hit = document.getElementById('peixe2');
+                var peixe2Hitbox = peixe2Hit.getBoundingClientRect();
 
 
+                var peixe3Hit = document.getElementById('peixe3');
+                var peixe3Hitbox = peixe3Hit.getBoundingClientRect();
 
                 // "if" utilizado para saber quando houve uma colisão entre o jogador e um inimigo,
                 // se qualquer uma das escalas X ou Y de cada canto de cada elemento dentro da tela colidir
@@ -284,9 +271,9 @@
                 // crava sua pontuação na tela
                 // para de executar o código de Hitbox, de aumento de pontos e da movimentação de inimigos
 
-                if ((PhitRight >= EhitLeft && PhitLeft <= EhitRight && PhitTop <= EhitBottom && PhitBottom >= EhitTop)
-                    || (PhitRight >= EhitLeft2 && PhitLeft <= EhitRight2 && PhitTop <= EhitBottom2 && PhitBottom >= EhitTop2)
-                    || (PhitRight >= EhitLeft3 && PhitLeft <= EhitRight3 && PhitTop <= EhitBottom3 && PhitBottom >= EhitTop3)) {
+                if ((hitboxP.right >= peixe1Hitbox.left && hitboxP.left <= peixe1Hitbox.right && hitboxP.top <= peixe1Hitbox.bottom && hitboxP.bottom >= peixe1Hitbox.top)
+                    || (hitboxP.right >= peixe2Hitbox.left && hitboxP.left <= peixe2Hitbox.right && hitboxP.top <= peixe2Hitbox.bottom && hitboxP.bottom >= peixe2Hitbox.top)
+                    || (hitboxP.right >= peixe3Hitbox.left && hitboxP.left <= peixe3Hitbox.right && hitboxP.top <= peixe3Hitbox.bottom && hitboxP.bottom >= peixe3Hitbox.top)) {
 
                         clearInterval(aumentoDePontos); //para o aumento de pontos
                         listaPontos.push(pontuação); //joga sua pontuação dentro da array
