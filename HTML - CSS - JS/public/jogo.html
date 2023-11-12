@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>teste</title>
     <link href="https://fonts.cdnfonts.com/css/prudencia" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jogoStyle.css">
                 
 
 </head>
@@ -55,7 +55,6 @@
             <img src="https://i.imgur.com/gehBsrS.gif" style="width: 350px;" alt="">
         </div>
 
-
     </div>
 
 
@@ -69,23 +68,23 @@
 
     // MOVIMENTO do personagem
 
-    var cima = 275;
+    // var cima = 275;
 
     function andar(event) {
 
-        if (event.key == 'ArrowUp') {
-            cima -= 200
-            if (cima < 80) {
-                cima = 80
-            }
-        }
+        // if (event.key == 'ArrowUp') {
+        //     cima -= 200
+        //     if (cima < 80) {
+        //         cima = 80
+        //     }
+        // }
 
-        if (event.key == 'ArrowDown') {
-            cima += 200
-            if (cima > 475) {
-                cima = 475
-            }
-        }
+        // if (event.key == 'ArrowDown') {
+        //     cima += 200
+        //     if (cima > 475) {
+        //         cima = 475
+        //     }
+        // }
 
         personagem.style.margin = `${cima}px 0px 0px 0px`;
 
@@ -101,7 +100,7 @@
         pontuação = 0;
 
         // spawna o player no meio da tela, quando ele começar a existir o jogador pode assumir o controle do personagem
-        area.innerHTML = `<div id="personagem"><img src="sub.png" style="width: 150px; margin: -30px 0px 0px -40px;"></div>`
+        area.innerHTML = `<div id="personagem"><img src="img/sub.png" style="width: 150px; margin: -30px 0px 0px -40px;"></div>`
 
 
         // Spawn dos inimigos abaixo
@@ -163,9 +162,9 @@
 
 
             spawnAleatorio.innerHTML = `
-        <div class="obstaculo" id="peixe" style="margin: 0px 0px 0px ${margem_peixe1}px;"> <img src="bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
-        <div class="obstaculo" id="peixe2" style="margin: 0px 0px 0px ${margem_peixe2}px;"> <img src="bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
-        <div class="obstaculo" id="peixe3" style="margin: 0px 0px 0px ${margem_peixe3}px;"> <img src="bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe" style="margin: 0px 0px 0px ${margem_peixe1}px;"> <img src="img/bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe2" style="margin: 0px 0px 0px ${margem_peixe2}px;"> <img src="img/bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
+        <div class="obstaculo" id="peixe3" style="margin: 0px 0px 0px ${margem_peixe3}px;"> <img src="img/bobfish.gif" style="width: 150px; margin: -10px 0px 0px -70px;"></div>
         `
 
             peixe.style.transition = '3s'
@@ -281,7 +280,7 @@
                         pontos.innerHTML = pontuação; //crava quantos pontos você fez na tela
 
                     for (posicao = 1; posicao < listaPontos.length; posicao += 1) {
-                        if (listaPontos[posicao] > listaPontos[posicao - 1]) {
+                        if (listaPontos[posicao] > listaPontos[posicao - 1]) {  
                             highscore = listaPontos[posicao]
                         }
                     }    
