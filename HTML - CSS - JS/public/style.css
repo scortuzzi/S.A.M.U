@@ -12,6 +12,15 @@ a {
     color: white;
 }
 
+a:hover {
+    color:rgb(179, 255, 65);
+}
+
+.aqui {
+    color: rgb(130, 156, 90);
+    text-decoration: none;
+}
+
 .displaySpace {
     display: flex;
     align-items: center;
@@ -26,20 +35,23 @@ a {
 
 .all {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     /* background-color: red; */
     display: flex;
     flex-direction: column;
 }
 
-.header {
+.identidade {
     background-color: #141414;
     max-width: 100%;
-    height: 100px;
     padding-left: 150px;
     padding-right: 60px;
+    border-color: #664DE0;
+}
+
+header {
+    height: 100px;
     border-bottom: solid 4px;
-    border-bottom-color: #664DE0;
     box-shadow: 0px 39px 20.7px -25px rgba(0, 0, 0, 0.25) inset;
 }
 
@@ -48,7 +60,7 @@ a {
 }
 
 
-.header span {
+header span {
     text-decoration: underline;
 }
 
@@ -169,6 +181,10 @@ a {
     margin-top: -20px;
 }
 
+.abissal {
+cursor: pointer;
+}
+
 .tresCards {
     /* background-color: white; */
     width: 1000px;
@@ -232,9 +248,34 @@ a {
 
 
 footer {
-width: 100%;
 height: 500px;
-background-color: #141414;  
 border-top: solid 4px;
-border-top-color: #664DE0;
+}
+
+footer .conteudo {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+}
+
+footer .img {
+    width: 80px;
+}
+
+#traço {
+    background-color: white;
+    width: 50%;
+    height: 2px;
+    margin-top: 50px;
+}
+
+#listinhaFooter {
+    margin-top: 50px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100px;
 }
