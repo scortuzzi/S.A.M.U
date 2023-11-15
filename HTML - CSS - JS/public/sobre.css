@@ -1,16 +1,14 @@
 
-body {
-    background-image: url(https://i.pinimg.com/originals/1e/2d/7e/1e2d7ecf57ce7de7798db96b2ed06dae.gif);
-    background-size: cover;
+a{
+ text-decoration: none;
 }
 
-.corpo2 {
+.corpoSobre {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(73, 20, 73, 0.7);
 }
 
 .traçozinho {
@@ -20,10 +18,11 @@ body {
     
 }
 
-.estrutura2 {
+.estruturaSobre {
     max-width: 100%;
     height: 2040px;
-    padding-top: 150px;
+padding-top: 50px;
+margin-bottom: 50px;
 }
 
 .sobreEImagem {
@@ -47,7 +46,7 @@ border: solid;
 border-color: white;
 }
 
-.SobreAbissal {
+.SobreD20 {
     display: flex; 
     flex-direction: column;
     margin-left: 170px;

@@ -15,10 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-h1 {
-    margin: -50px -20px -2px 0px;
+    margin-bottom: 100px;
 }
 
 .container {
@@ -26,7 +23,7 @@ h1 {
     height: 500px;
     background-color: #141414;
     border: solid 4px;
-    border-color: #664DE0;
+    border-color: #8fe04d;
     display: flex;
     flex-direction: row;
 }
@@ -76,7 +73,7 @@ button {
 input {
     width: 400px;
     height: 40px;
-    background-color: rgba(102, 77, 224, 0.1);
+    background-color: rgba(30, 92, 56, 0.1);
     border: solid 2px;
     border-radius: 15px;
     border-color: white;
@@ -86,11 +83,6 @@ input {
     text-align: center;
 }
 
-footer {
-    margin-top: 100px;
-}
-
-
 /* parte só para o login */
 
 .container2 {
@@ -98,6 +90,6 @@ footer {
     height: 500px;
     background-color: #141414;
     border: solid 4px;
-    border-color: #664DE0;
+    border-color: #8fe04d;
     justify-content: space-evenly;
 }

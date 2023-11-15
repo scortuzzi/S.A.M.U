@@ -11,12 +11,11 @@ body {
     margin: 0;
     font-family: 'Lexend Exa', sans-serif;
     color: white;
-    background-color: rgb(41, 41, 194);
-    background-size: contain;
+    background-color: #141414;
 }
 
 #body {
-    background-image: url(img/fundo.gif);
+    background-image: url(https://media0.giphy.com/media/elsgByhRs2hmfIHQoe/giphy.gif);
     background-size: cover;
 }
 
@@ -28,11 +27,11 @@ header {
     max-width: 100%;
     display: flex;
     top: 0;
-    text-decoration: underline;
 }
 
 a {
     color: white;
+    text-decoration: none;
 }
 
 a:hover {
@@ -57,8 +56,9 @@ a:hover {
 
 #logo {
     position: static;
-    width: 200px;
-    margin-top: 162px;
+    width: 80px;
+    margin-top: 100px;
+    margin-left: -60px;
 }
 
 .user {
@@ -77,30 +77,42 @@ a:hover {
 }
 
 .identidade {
-    background-color: #141414;
+    background-color: #222222;
     max-width: 100%;
     padding-left: 150px;
     padding-right: 60px;
-    border-color: #664DE0;
+    border-color: #8fe04d;
 }
 
-/* ------------------------------------------ */
-/* corpo */
+/* fim da header --------------------------*/
+
+/* corpo */ 
 
 .flexivel {
     display: flex;
     width: 100%;
+    background-color: rgb(18, 19, 18);
+    justify-content: center;
 }
 
 .navbar {
-    background-color: rgba(45, 50, 86);
+    /* background-color: rgb(3, 39, 31); */
     width: 200px;
-    max-height: 100%;
+    height: 500px;
     border-radius: 15px;
-    color: #ECD4FF;
+    /* color: #ECD4FF; */
     display: flex;
     flex-direction: column;
-    text-decoration: underline;
+    text-align: center;
+    justify-content: space-evenly;
+    padding-top: 50px;
+}
+
+#tracinho {
+    width: 2px;
+    height: 60px;
+    background-color: white;
+    margin-left: 85px;
 }
 
 .topicos {
@@ -137,13 +149,14 @@ a:hover {
 .card {
     width: 1000px;
     height: 525px;
-    background-color: #1C102C;
+    background-color: #0c4937;
     border-radius: 10px;
     display: flex;
+    justify-content: space-evenly;
 }
 
 .CCard {
-    width: 45%;
+    width: 50%;
     max-height: 85%;
     margin-top: 30px;
     padding-left: 0;
@@ -151,6 +164,30 @@ a:hover {
 
 .CCard p {
     margin-left: 40px;
+    font-size: 20px;
+}
+
+.criarFicha {
+    background-color: #8fe04d;
+    border: 0;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    width: 200px;
+    height: 80px;
+    margin-top: 70px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cardzinho a{
+    text-decoration: none;
+}
+
+.criarFicha:hover {
+    width: 250px;
+    height: 100px;
+    font-size: 30px;
 }
 
 #jogoDestaque {
@@ -158,7 +195,7 @@ a:hover {
 }
 
 .ImagemCard {
-    width: 85%;
+    width: 50%;
     height: 85%;
     /* background-color: red; */
     margin-top: 30px;
@@ -168,16 +205,13 @@ a:hover {
 }
 
 .Imagem {
-    width: 620px;
+    width: 350px;
     border: solid;
     border-color: white;
     border-radius: 10px;
-    margin-top: -20px;
+    margin-top: 20px;
 }
 
-.abissal {
-    cursor: pointer;
-}
 
 .tresCards {
     /* background-color: white; */
@@ -217,6 +251,10 @@ a:hover {
     /* background-color: #664DE0; */
 }
 
+.conteudo a{
+    text-decoration: none;
+}
+
 .conteudo h1 {
     text-decoration: underline;
 }
@@ -241,9 +279,13 @@ a:hover {
 
 
 
-/* ------------------------------------------ */
-/* FOOTER */
 
+
+
+
+
+
+/* footer */
 
 footer {
     height: 500px;
