@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abissal - cadastro</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="login/cadastro.css">
 </head>
-<body>
+
+<body id="body">
 
     <div class="all">
 
@@ -35,8 +38,133 @@
         </header>
         <!-- FIM DA HEADER -->
 
-    </div>
+        <div class="corpo3">
 
-    
+            <div class="estrutura3">
+
+                
+                    <h1>CADASTRO</h1>
+                    <div class="container">
+
+                        <div class="cadastro">
+
+                            <div class="input">
+                                <span>Nome completo:</span>
+                                <input id="nome_input" placeholder="seu nome">
+                            </div>
+
+                            <div class="input">
+                                <span>Email:</span>
+                                <input id="email_input" placeholder="@gmail.com">
+                            </div>
+
+                            <div class="input">
+                                <span>CPF:</span>
+                                <input id="cpf_input" placeholder="000.000.000-00">
+                            </div>
+
+                            <div class="input">
+                                <span>Telefone:</span>
+                                <input id="telefone_input" placeholder="+55 (11) 00000-0000">
+                            </div>
+
+                        </div>
+
+                        <div class="cadastro">
+
+                            <div class="input">
+                                <span>Senha:</span>
+                                <input id="senha_input" placeholder="******">
+                            </div>
+
+                            <div class="input">
+                                <span>Confirmar Senha:</span>
+                                <input id="senha_input" placeholder="*******">
+                            </div>
+
+                            <div class="forte trindade">
+                                <span id="fortitudeSenha">...</span>
+                                <div class="confirmação"></div>
+                            </div>    
+
+                            <button onclick="cadastro()">Avançar</button>
+
+
+
+                        </div>
+
+
+
+
+                    </div>
+               
+
+            </div>
+        </div>
+            
+            <div> <!-- começo do footer -->
+                <footer class="identidade trindade">
+
+                    <div>
+                        <h1 class="underline">ABISSAL</h1>
+                    </div>
+
+                    <div class="conteudo">
+
+                        <div id="listinhaFooter">
+                            <ul>
+                                <li>Jogos</li>
+                                <li>Fóruns</li>
+                                <li>Publique seu jogo</li>
+                            </ul>
+                        </div>
+
+                        <div id="listinhaFooter">
+                            <ul>
+                                <li>Sobre nós</li>
+                                <li>Abissal</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                    <div id="traço"></div>
+                    <!----------------------------------------------------------------------------------------->
+
+                    <div class="conteudo">
+
+                        <div class="trindade">
+                            <p>email</p>
+                            <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                                alt="email logo" class="img">
+                        </div>
+
+                        <div class="trindade">
+                            <p>twitter</p>
+                            <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo"
+                                class="img">
+                        </div>
+
+                        <div class="trindade">
+                            <p>discord</p>
+                            <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                                alt="discord logo" class="img">
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
+    </div> <!--fim de tudo-->
+
 </body>
 </html>
+
+
+<script>
+
+    function cadastro() {
+
+    }
+
+</script>
