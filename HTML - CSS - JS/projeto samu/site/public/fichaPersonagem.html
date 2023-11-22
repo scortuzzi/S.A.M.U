@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.A.M.U - Ficha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ficha.css">
+    <link rel="icon" href="assets/img/logo.png">
+</head>
+
+<body onload="validarSessao(), trazerFicha(), listarPericias()">
+
+    <header class="displaySpace identidade">
+
+        <div>
+            <h1>S.A.M.U</h1>
+        </div>
+
+        <div class="botoes displaySpace">
+            <span><a href="fichas.html">fichas</a></span>
+            <span><a href="index.html">home</a></span>
+            <div class="barrinha"></div>
+            <span><a href="login.html">login</a></span>
+            <span><a href="cadastro.html">cadastro</a></span>
+
+            <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
+
+            <div class="user"></div>
+            <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+
+        </div>
+
+    </header>
+
+    <div class="fichaCorpo">
+
+        <div class="informacoes trindade">
+
+            <div class="credencias space">
+
+                <div>
+                    <img style="width: 70px; border: solid 2px white; margin-top: 10px;"
+                        src="https://static.wikia.nocookie.net/ordemparanormal/images/1/11/Dante_em_Sinais_do_Outro_Lado.png/revision/latest?cb=20221212004702&path-prefix=pt-br">
+                </div>
+
+                <div class="fundo">
+                    <span>personagem:</span> <span id="spanPersonagem"
+                        style="margin-left: 10px; text-decoration: none;"></span>
+                </div>
+
+                <div class="fundo">
+                    <span>jogador:</span> <span id="spanJogador"
+                        style="margin-left: 10px; text-decoration: none;"></span>
+                </div>
+            </div>
+
+            <div class="atributosFicha trindade">
+                <img src="assets/img/atributos.png" class="atributosImagem">
+
+                <input value="1" type="number" class="inputéRelativa" id="agilidade_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="inteligencia_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="vigor_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="presenca_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="forca_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+            </div>
+
+            <div class="credencias space" style="margin-top: 20px; height: 15%;">
+                <div>
+                    <div style="display: flex;">
+                        <span style="margin-right: 10px;">origem:</span>
+                    </div>
+
+                    <div style="display: flex;">
+                        <span style="margin-right: 10px;">classe:</span>
+
+                    </div>
+
+                    <div style="display: flex;">
+                        <span>NEX:</span>
+                    </div>
+
+                    <div style="display: flex;">
+                        <span>deslocamento:</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <span class="underline fundo" id="origemSpan"></span>
+                    </div>
+
+                    <div>
+                        <span class="underline fundo" id="classeSpan"></span>
+                    </div>
+
+
+
+                    <div style="display: flex;">
+                        <span class="underline fundo" style="width: 100%;" id="nexSpan">5%</span>
+                    </div>
+
+                    <div style="display: flex;">
+                        <span class="underline fundo" style="width: 100%;" id="deslocamentoSpan">9m</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tracao"></div>
+
+            <div class="HPSAN trindade">
+
+                <div class="simulacao" style="margin-top: 30px;">
+                    <span>HP</span>
+                    <div class="bar" id="hp">12/12</div>
+                </div>
+
+                <div class="simulacao">
+                    <span>SAN</span>
+                    <div class="bar" id="san">7/7</div>
+                </div>
+
+                <div class="simulacao">
+                    <span>pe</span>
+                    <div class="bar" id="pe">5/5</div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="pericias">
+
+            <div class="periciasNome" id="listaPericias_div">
+
+                <h3 style="align-self: center;">perícia</h3>
+
+            </div>
+
+
+            <div class="colunaNumeros">
+
+                <h3>dados</h3>
+
+                <span> (AGI) </span>
+                <span> (PRE) </span>
+                <span> (PRE) </span>
+                <span> (FOR) </span>
+                <span> (INT) </span>
+                <span> (INT) </span>
+                <span> (AGI) </span>
+                <span> (PRE) </span>
+                <span> (PRE) </span>
+                <span> (VIG) </span>
+                <span> (AGI) </span>
+                <span> (AGI) </span>
+                <span> (PRE) </span>
+                <span> (PRE) </span>
+                <span> (INT) </span>
+                <span> (FOR) </span>
+                <span> (INT) </span>
+                <span> (INT) </span>
+                <span> (PRE) </span>
+                <span> (AGI) </span>
+                <span> (AGI) </span>
+                <span> (INT) </span>
+                <span> (AGI) </span>
+                <span> (PRE) </span>
+                <span> (INT) </span>
+                <span> (INT) </span>
+                <span> (INT) </span>
+                <span> (PRE) </span>
+
+            </div>
+
+            <div class="colunaNumeros"></div>
+
+
+            <div class="colunaNumeros" id="listaValores_div">
+
+                <h3>Bônus</h3>
+
+ 
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer class="identidade trindade footerFicha">
+
+        <div>
+            <h1 class="underline">S.A.M.U</h1>
+        </div>
+
+        <div class="conteudo">
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li>fichas</li>
+                    <li>suporte</li>
+                    <li><a href="https://jamboeditora.com.br/categoria/rpg/ordem-paranormal/">ordem paranormal</a></li>
+                </ul>
+            </div>
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="#sobreNos">projeto S.A.M.U</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="traço"></div>
+        <!------------------------------------------------------------->
+
+        <div class="conteudo">
+
+            <div class="trindade">
+                <p>email</p>
+                <a href="https://mail.google.com/mail/u/0/#inbox">
+                    <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                        alt="email logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>twitter</p>
+                <a href="https://twitter.com/petscortz">
+                    <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>discord</p>
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                    alt="discord logo" class="img">
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+    
+    
+    
+    var idFichaVar = sessionStorage.FICHA
+
+    function validarSessao() {
+
+        var nickUsuario = sessionStorage.NICK_USUARIO;
+
+        if (nickUsuario == null) {
+            nomeUsuario_span.innerHTML = ``
+        }
+        else {
+            nomeUsuario_span.innerHTML = nickUsuario
+        }
+
+    }
+
+    // traz os dados da ficha, desde os atributos, nome do personagem, classe e etc...
+    function trazerFicha() {
+
+
+        fetch(`/ficha/listar/${idFichaVar}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+
+
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    exibirInformacoes(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        //exibe na tela os dados recebidos do banco de dados em seus respectivos espaços
+        function exibirInformacoes(resposta) {
+
+            var fichaId = resposta[0].idFicha;
+            var nickname = resposta[0].nick;
+            var playerName = resposta[0].nomePersonagem;
+            var classe = resposta[0].classe;
+            var origem = resposta[0].nomeOrigem;
+
+            var agilidade = resposta[0].agilidade;
+            var inteligencia = resposta[0].inteligencia;
+            var vigor = resposta[0].vigor;
+            var presenca = resposta[0].presenca;
+            var forca = resposta[0].forca;
+
+
+            spanJogador.innerHTML = nickname;
+            spanPersonagem.innerHTML = playerName;
+            origemSpan.innerHTML = origem;
+            classeSpan.innerHTML = classe;
+
+
+            agilidade_input.value = agilidade
+            inteligencia_input.value = inteligencia;
+            vigor_input.value = vigor;
+            presenca_input.value = presenca;
+            forca_input.value = forca;
+
+
+        }
+    }
+
+    //uma função para receber o nome de todas as perícias
+    function listarPericias() {
+
+        fetch(`/pericia/listar/`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+
+                    exibirPericias(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        // uma função com um for, para assim que ele receber os nomes, ele exibe um por um na tela 
+        // usando um laço de repetição
+        function exibirPericias(resposta) {
+
+            for (i = 0; i <= 27; i++) {
+
+                listaPericias_div.innerHTML += `
+                    <div> <img src="assets/img/logo.png" id="${resposta[i].nomePericia}"> <span>${resposta[i].nomePericia}</span> </div>
+                    `
+
+            }
+        }
+
+        // daqui para baixo nós vamos buscar os valores das perícias dentro do banco apartir da tabela fichaPericia, 
+        // se não houver nenhum dado inserido nela, o sistema exibe o valor como 0, se ja houver, o sistema
+        // o exibe ao lado de sua respectiva perícia
+
+
+
+
+        // boa noite peter do passado, espero que tenha tido uma ótima sessão...
+        // eu deixei algumas coisas para você fazer hoje, a última coisa muahahahahaah
+        // fazer os valores de bônus aparecer na direitinha, boa sorte com o select de fdp ae
+        // mama meo pau
+        
+
+            // passo 1, buscar valor por valor
+            fetch(`/valores/listar/${idFichaVar}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        exibirvalores(resposta);
+                        console.log(resposta)
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                    exibirvalores(resposta);
+                }
+            })
+
+
+            // passo 2, exibir o valor encontrado
+            function exibirvalores(resposta) {
+
+                var i = 0;
+                
+                while (i <= 27) {
+
+
+
+                    listaValores_div.innerHTML += `
+                    <span>  <input id="${i}" type="number" class="bônus" onkeyup="mudarBonus(this.id)" value="${resposta[i].valor}">  </span>
+                    `
+                
+                    i += 1;
+ 
+                }
+                
+
+            }
+
+        }
+
+    
+
+
+    function mudarBonus(id) {
+
+        
+        var input = document.getElementById(id)
+        var valor = input.value
+        console.log(id)
+
+        fetch(`/valores/alterar/${Number(idFichaVar)}/${Number(id)+100}/${valor}`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+      });
+    return false;
+  }
+
+
+
+</script>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D20 - Atributos</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/criador.css">
+    <link rel="icon" href="assets/img/logo.png">
+
+    <script src="./js/sessao.js"></script>
+</head>
+
+<body onload="validarSessao(), arrumarAtributo()">
+
+
+    <header class="displaySpace identidade">
+
+        <div>
+            <h1>S.A.M.U</h1>
+        </div>
+
+        <div class="botoes displaySpace">
+            <span><a href="fichas.html">fichas</a></span>
+            <span><a href="index.html">home</a></span>
+            <div class="barrinha"></div>
+            <span><a href="login.html">login</a></span>
+            <span><a href="cadastro.html">cadastro</a></span>
+
+            <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
+            
+            <div class="user"></div>
+            <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+
+        </div>
+
+    </header>
+
+
+    <div class="flexivel">
+
+        <div class="AOT">
+            <div class="navbar">
+
+                <h2 id="Processo">Atributos</h2>
+
+                <h2 id="tracinho"></h2>
+
+                <h2><a href="origens.html">Origens</a></h2>
+
+                <h2 id="tracinho"></h2>
+
+                <h2><a href="toques.html">Toques Finais</a></h2>
+
+
+            </div> <!-- fim da navbar -->
+
+        </div>
+
+        <div class="corpo">
+
+            <div class="tutorial trindade">
+                <p>Estes são seus atributos, todos eles começam em 1 e você possui 4 pontos para distribuir como quiser entre eles,
+                    você pode reduzir um ponto a 0 para receber um ponto adicional associado a outro atributo, porém nenhum deles
+                    pode ultrapassar 3 pontos inicialmente 
+                </p>
+
+                <p>total de pontos restantes:</p>
+                <span id="pontosRestantes" style="font-size: 45px; text-decoration: underline;"></span>
+            </div>
+
+            <div class="atributos trindade">
+                <img src="assets/img/atributos.png" class="imagem">
+                <input value="1" type="number" class="inputéRelativa" id="agilidade_input" min="0" max="3" onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="inteligencia_input" min="0" max="3" onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="vigor_input" min="0" max="3" onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="presenca_input" min="0" max="3" onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="forca_input" min="0" max="3" onkeyup="arrumarAtributo()">
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+    <footer class="identidade trindade">
+
+        <div>
+            <h1 class="underline">S.A.M.U</h1>
+        </div>
+
+        <div class="conteudo">
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li>fichas</li>
+                    <li>suporte</li>
+                    <li><a href="https://jamboeditora.com.br/categoria/rpg/ordem-paranormal/">ordem paranormal</a></li>
+                </ul>
+            </div>
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="#sobreNos">projeto S.A.M.U</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="traço"></div>
+        <!------------------------------------------------------------->
+
+        <div class="conteudo">
+
+            <div class="trindade">
+                <p>email</p>
+                <a href="https://mail.google.com/mail/u/0/#inbox">
+                    <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                        alt="email logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>twitter</p>
+                <a href="https://twitter.com/petscortz">
+                    <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>discord</p>
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                    alt="discord logo" class="img">
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+
+    function validarSessao() {
+
+        var nickUsuario = sessionStorage.NICK_USUARIO;
+
+        if (nickUsuario == null) {
+            nomeUsuario_span.innerHTML = ``
+        }
+        else {
+            nomeUsuario_span.innerHTML = nickUsuario
+        }
+
+    }
+
+        function arrumarAtributo() {
+
+        var atributos = [
+            Number(agilidade_input.value),
+            Number(inteligencia_input.value),
+            Number(presenca_input.value),
+            Number(forca_input.value),
+            Number(vigor_input.value)
+        ]
+
+        var inputs = [
+            agilidade_input,
+            inteligencia_input,
+            presenca_input,
+            forca_input,
+            vigor_input
+        ]
+
+        for (i = 0; i < atributos.length; i ++) {
+
+            if (atributos[i] < 0) {
+                atributos[i] = 0
+            }
+            else if (atributos[i] > 3) {
+                atributos[i] = 3
+            } 
+
+            inputs[i].value = atributos[i]
+        }
+        sessionStorage.agilidade = agilidade_input.value,
+        sessionStorage.inteligencia = inteligencia_input.value,
+        sessionStorage.vigor = vigor_input.value,
+        sessionStorage.presença = presenca_input.value,
+        sessionStorage.força = forca_input.value
+
+
+        
+        var pontosTotais = ((atributos[0] + atributos[1] + atributos[2] + atributos[3] + atributos[4]) - 9) * -1;
+
+        if (pontosTotais < 0) {pontosRestantes.style.color = 'red'}
+        else {pontosRestantes.style.color = 'white'}
+        pontosRestantes.innerHTML = pontosTotais 
+        
+        
+        
+        
+    }
+    
+    
+
+</script>

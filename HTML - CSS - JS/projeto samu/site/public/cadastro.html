@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abissal - Cadastro</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/img/logo.png">
+  <link rel="stylesheet" href="./css/cadastro.css">
+
+  <script src="./js/sessao.js"></script>
+</head>
+
+<body id="body" onload="validarSessao()">
+
+  <div class="all">
+
+
+
+    <!-- HEADER -->
+    <header class="displaySpace identidade">
+
+      <div>
+        <h1>S.A.M.U</h1>
+      </div>
+
+      <div class="botoes displaySpace">
+        <span><a href="fichas.html">fichas</a></span>
+        <span><a href="index.html">home</a></span>
+        <div class="barrinha"></div>
+        <span><a href="login.html">login</a></span>
+        <span class="aqui">cadastro</span>
+
+        <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
+
+        <div class="user"></div>
+        <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+
+      </div>
+
+    </header>
+    <!-- FIM DA HEADER -->
+
+    <div class="corpo3">
+
+      <div class="estrutura3">
+
+
+        <h1>CADASTRO</h1>
+        <div class="container">
+
+          <div class="cadastro">
+
+            <div class="input">
+              <span>Nome completo:</span>
+              <input id="nome_input" placeholder="seu nome">
+            </div>
+
+            <div class="input">
+              <span>Email:</span>
+              <input id="email_input" placeholder="@gmail.com">
+            </div>
+
+
+            <div class="input">
+              <span>Nick:</span>
+              <input id="nick_input" placeholder="seu nome online">
+            </div>
+
+            <div class="input">
+              <span>Telefone:</span>
+              <input id="telefone_input" placeholder="+55 (11) 00000-0000">
+            </div>
+
+
+          </div>
+
+          <div class="cadastro">
+
+
+            <div class="input">
+              <span>Senha:</span>
+              <input id="senha_input" placeholder="******" type="password">
+            </div>
+
+            <div class="input">
+              <span>Confirmar Senha:</span>
+              <input id="senhaCon_input" placeholder="*******" type="password">
+            </div>
+
+
+            <div class="forte trindade">
+              <span id="fortitudeSenha">...</span>
+              <div class="confirmação"></div>
+            </div>
+
+            <button onclick="cadastro()">Avançar</button>
+
+            <div id="mensagem_erro" style="color: rgb(255, 47, 47);"></div>
+
+
+          </div>
+
+
+
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <div> <!-- começo do footer -->
+      <footer class="identidade trindade">
+
+        <div>
+          <h1 class="underline">S.A.M.U</h1>
+        </div>
+
+        <div class="conteudo">
+
+          <div id="listinhaFooter">
+            <ul>
+              <li>fichas</li>
+              <li>suporte</li>
+              <li><a href="https://jamboeditora.com.br/categoria/rpg/ordem-paranormal/">ordem paranormal</a></li>
+            </ul>
+          </div>
+
+          <div id="listinhaFooter">
+            <ul>
+              <li><a href="cadastro.html">Cadastro</a></li>
+              <li><a href="#sobreNos">projeto S.A.M.U</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+
+        <div id="traço"></div>
+        <!------------------------------------------------------------->
+
+        <div class="conteudo">
+
+          <div class="trindade">
+            <p>email</p>
+            <a href="https://mail.google.com/mail/u/0/#inbox">
+              <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                alt="email logo" class="img">
+            </a>
+          </div>
+
+          <div class="trindade">
+            <p>twitter</p>
+            <a href="https://twitter.com/petscortz">
+              <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo" class="img">
+            </a>
+          </div>
+
+          <div class="trindade">
+            <p>discord</p>
+            <img
+              src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+              alt="discord logo" class="img">
+          </div>
+        </div>
+
+      </footer>
+    </div>
+
+  </div> <!--fim de tudo-->
+
+</body>
+
+</html>
+
+
+<script>
+
+  function validarSessao() {
+
+    console.log('legal')
+    var nickUsuario = sessionStorage.NICK_USUARIO;
+
+    if (nickUsuario == null) {
+      nomeUsuario_span.innerHTML = ``
+    }
+    else {
+      nomeUsuario_span.innerHTML = nickUsuario
+    }
+
+  }
+
+  function senhaDinamica() {
+    
+  }
+
+  function cadastro() {
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeUsuario_var = nome_input.value;
+    var emailUsuario_var = email_input.value;
+    var nickUsuario_var = nick_input.value;
+    var telefone_var = telefone_input.value;
+    var senha_var = senha_input.value;
+    var confirmacaoSenha_var = senhaCon_input.value;
+    if (
+      nomeUsuario_var == "" ||
+      emailUsuario_var == "" ||
+      nickUsuario_var == "" ||
+      senha_var == "" ||
+      confirmacaoSenha_var == ""
+    ) {
+      mensagem_erro.innerHTML =
+        "Preencha todos os campos";
+
+
+      return false;
+    }
+    else if (nomeUsuario_var.length <= 1) {
+      mensagem_erro.innerHTML =
+        "Nome muito curto";
+
+
+      return false;
+    }
+    else if (emailUsuario_var.indexOf('@') < 0) {
+      mensagem_erro.innerHTML =
+        "Seu email não tem @";
+
+
+      return false;
+    }
+    else if (senha_var.length < 6) {
+      mensagem_erro.innerHTML =
+        "Senha deve ter mais que 6 caracteres";
+
+
+      return false;
+    }
+    else if (senha_var != confirmacaoSenha_var) {
+      mensagem_erro.innerHTML =
+        "Senhas não coincidem";
+
+
+      return false;
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeUsuario_var,
+        emailServer: emailUsuario_var,
+        nickServer: nickUsuario_var,
+        senhaServer: senha_var,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+
+        // cardErro.style.display = "block";
+
+        mensagem_erro.innerHTML =
+          "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+        setTimeout(() => {
+          window.location = "login.html";
+        }, "2000");
+
+        //   limparFormulario();
+        //   finalizarAguardar();
+
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+    return false;
+  }
+
+
+</script>

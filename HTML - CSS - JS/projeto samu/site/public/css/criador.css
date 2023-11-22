@@ -1,0 +1,227 @@
+.corpo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 60px;
+    margin-bottom: 150px;
+}
+
+.corpoOrigem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 300px;
+    padding-top: 60px;
+    margin-bottom: 350px;
+}
+
+.imagem {
+    width: 500px;
+}
+
+.tutorial {
+    width: 50%;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+}
+
+.tutorial2 {
+    width: 80%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.tutorial p {
+    width: 75%;
+    text-align: center;
+}
+
+#Processo {
+    color: rgb(62, 141, 113);
+}
+
+.atributos {
+    width: 50%;
+    height: 500px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+input {
+    background: none;
+    border: 0;
+    /* border-color: white; */
+    width: 70px;
+    height: 70px;
+    color: white;
+    font-size: 50px;
+    outline: none;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.inputéRelativa {
+    position: relative;
+
+}
+
+#agilidade_input {
+    bottom: 460px;
+    right: 3px;
+}
+
+#inteligencia_input {
+    bottom: 415px;
+    left: 154px;
+}
+
+#vigor_input {
+    bottom: 285px;
+    left: 110px;
+}
+
+#presenca_input {
+    bottom: 340px;
+    right: 115px;
+}
+
+#forca_input {
+    bottom: 590px;
+    right: 157px;
+}
+
+
+/* ----------------------------------------------- */
+
+
+.origensCampo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tutorialOrigem {
+    width: 80%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-top: 60px;
+    margin-bottom: 20px;
+}
+
+.campoSelect{
+    width: 40%;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px; 
+
+}
+
+#origem_input {
+    width: 400px;
+    height: 50px;
+    background: none;
+    border-color: white;
+}
+
+.inputsPersonagem {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+}
+
+.inputsPersonagem button{
+    background-color: greenyellow;
+    width: 150px;
+    margin-left: 50px;
+    margin-top: 15px;
+    height: 50px;
+    color: rgb(18, 63, 18);
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0;
+}
+
+.inputsPersonagem input{
+    padding-left: 10px;
+    border: solid 1px;
+    border-color: rgba(171, 255, 46, 0.6);
+    border-radius: 10px;
+    width: 250px;
+    height: 35px;
+    font-size: 20px;
+    text-align: start;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.origens{
+    overflow: auto;
+    white-space: nowrap;
+    width: 1000px;
+}
+
+.origemSelect  {
+    display: inline-block;
+    vertical-align: middle;
+    width: 250px;
+    height: 300px;
+    background-color: rgb(48, 48, 48);
+    border-radius: 10px;
+    margin-right: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.toquesFinais {
+    height: 500px;
+    /* background-color: red; */
+}
+
+.descricao {
+    margin-top: 20px;
+}
+
+#personagemDescricao_input {
+    background-color: #141414;
+    color: white;
+    border: solid 1px;
+    border-color: rgba(171, 255, 46, 0.6);
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 9px;
+    display: flex;
+    width: 100%;
+    height: 250px;
+}
+
+select {
+    background-color: #141414;
+    border-color: rgba(171, 255, 46, 0.6);
+    border-radius: 10px;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
+.origensBox {
+    height: 100%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.A.M.U - Home</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/sobre.css">
+    <link rel="icon" href="assets/img/logo.png">
+
+    <script src="./js/sessao.js"></script>
+</head>
+
+<body onload="validarSessao()">
+
+
+    <header class="displaySpace identidade">
+
+        <div>
+            <h1>S.A.M.U</h1>
+        </div>
+
+        <div class="botoes displaySpace">
+            <span><a href="fichas.html">fichas</a></span>
+            <span class="aqui">home</span>
+            <div class="barrinha"></div>
+            <span><a href="login.html">login</a></span>
+            <span><a href="cadastro.html">cadastro</a></span>
+
+
+            <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
+
+            <div class="user"></div>
+            <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+        </div>
+
+        </div>
+
+    </header>
+
+    <!-- ----------------------------------------------------------------------------------------- -->
+
+    <div class="flexivel"> <!-- essa tem que ser flexivel (uma do lado da outra) -->
+
+        <!-- corpo do site -->
+        <div class="estrutura trindade">
+
+            <h2 class="destaque">COMECE AGORA</h2> <!-- começo -->
+            <div class="card">
+
+                <div class="CCard trindade">
+
+                    <h2 id="jogoDestaque">FICHAS</h2>
+
+                    <p>Crie suas fichas de forma mais ágil</p>
+
+                    <p>Com apenas um clique, tenha muita mais acessibilidade as suas informações e concentre-se somente
+                        em sua imersão
+                        clique agora e comece já
+                    </p>
+
+                    <a href="atributos.html"><button class="criarFicha">Criar Ficha</button></a>
+
+                </div>
+
+                <div class="ImagemCard">
+
+                    <img src="https://i.etsystatic.com/7178218/r/il/e3ca16/2774017115/il_1080xN.2774017115_jngn.jpg"
+                        class="Imagem">
+
+                </div>
+
+            </div> <!--  fim do card -->
+
+
+            <!--  cardzinhos -->
+
+            <div class="tresCards">
+
+
+                <div class="cardzinho trindade">
+                    <div>
+                        <img src="https://img.freepik.com/free-vector/video-game-developer-concept-illustration_114360-5866.jpg"
+                            alt="gamedev illustration">
+                    </div>
+
+                    <div class="texto trindade">
+                        <h3>Otimização</h3>
+
+                        <span>
+                            Crie fichas mesmo sendo <br> <span>iniciante com nossa ajuda</span>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="cardzinho trindade">
+                    <div>
+                        <img src="https://us.123rf.com/450wm/lineartestpilot/lineartestpilot2005/lineartestpilot200504150/146008557-icon-of-natural-20-critical-hit-d20-dice-roll.jpg?ver=6"
+                            alt="iceberg illustration">
+                    </div>
+
+                    <div class="texto trindade">
+                        <h3>D20 Sheets</h3>
+
+                        <span>
+                            conheça mais sobre o <br> <span> projeto D20 Sheets </span>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cardzinho trindade">
+                    <div>
+                        <img src="https://s3-alpha-sig.figma.com/img/43de/d936/7824b9e3a3f3749e18c528ecd55df66e?Expires=1700438400&Signature=H9BVQ~JgFi3h9RfIKLoc8bRU9hk4wzQGOeIHMcXulFHPw87dcUBaf2t8oxi8Fns5VkrNtEIqVBjtAbjgz9VcFjg4ouQcuiFrdcI-XMoxhR8degN8VPBLYVJD4A~l9572gYiQLU13GGFL4bpK5GRjTnzw78Ht-gRTzjJDWTXdon521G8YWS0od59jMaT-gCUjhXPTsteddOSvXJl2WFf9KJGYb~lIL4veACK1GNu-4k9FUpWtwvmwL0R7QqLD4POuTjyaex6cA6uoQgetxVWPIk3t0j1y9KKfTEF6My~TqAQ3nb~TncPYaQyvixcsQHG34hLozKiSxkbA7HqQHf8h3Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                            alt="controller illustration">
+                    </div>
+
+                    <div class="texto trindade">
+                        <h3>Estou aqui para jogar</h3>
+
+                        <span>
+                            visite nossa blibioteca de<br> <span>jogos indepentes</span>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="corpoSobre" id="sobreNos">
+
+
+                <div class="estruturaSobre trindade">
+
+
+                    <div class="traçozinho"></div>
+                    <!----------------------------------------------------------------------------------------->
+
+                    <h1 style="margin-top: 60px;">Sobre Nós</h1>
+
+
+                    <div class="sobreEImagem">
+
+                        <div class="SobreD20">
+                            <p>Começando como um projeto de faculdade, a Abissal é um projeto que tem como objetivo
+                                criar
+                                um espaço onde nós possamos trazer mais pessoas para conhecer o mundo dos RPG's de mesa
+                            </p>
+
+                            <p>Através deste site, nós criamos uma maior acessibilidade a aqueles que possuem certa
+                                hesitação ao entrar no mundo das campanhas de RPG por conta da alta quantidade de regras
+                                e complexidade dos sistemas de fichas para seus personagens, portanto, um lugar que
+                                fizesse com que este processo deixasse de se tornar uma sobrecarga foi pensado para
+                                estas pessoas.
+                            </p>
+                        </div>
+
+                        <div>
+                            <img src="https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2LRR2ZDALEI6TPZE3NFZ7NRKUI.jpg"
+                                alt="iceberg illustration" style="margin-right: 100px;">
+                        </div>
+                    </div>
+
+                    <div class="traçozinho"></div>
+                    <!----------------------------------------------------------------------------------------->
+
+
+                    <div class="sobreEImagem">
+
+                        <div>
+                            <img src="assets/img/autor.png" alt="imagem do autor" style="margin-left: 150px;">
+                        </div>
+
+                        <div style="width: 100%;">
+
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <h1>Sobre o Autor</h1>
+
+                                <p>Pedro Henrique Scortuzzi de Oliveira é um estudante brasileiro atualmente cursando
+                                    Análise de desenvolvimento de sistemas na
+                                    faculdade "SpTech", em São Paulo
+                                </p>
+
+                                <p>
+                                    Desde criança Pedro já demonstrava uma paixão enorme por jogos, e todo este amor foi
+                                    culminado na forma deste site, onde ele
+                                    busca cada vez mais conhecer novas pessoas com o mesmo amor, ao mesmo tempo que
+                                    pudesse desbravar as histórias e ideias de
+                                    pessoas tão apaixonadas quanto ele
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="traçozinho"></div>
+                    <!----------------------------------------------------------------------------------------->
+
+                    <div class="autor trindade">
+
+                        <h1>CONTATO</h1>
+
+                        <div class="trindade space">
+
+                            <div class="links">
+                                <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo">
+                                <span><a href="https://twitter.com/petscortz">@petscortz</a></span>
+                            </div>
+                        </div>
+
+                        <div class="links">
+                            <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                                alt="discord logo">
+                            <span>pe#2572</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- fim dos cardzinhos -->
+
+
+            </div>
+            <!-- FIM DA ESTRUTURA -->
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <!-- ----------------------------------------------------------------------------------------- -->
+
+    <footer class="identidade trindade">
+
+        <div>
+            <h1 class="underline">S.A.M.U</h1>
+        </div>
+
+        <div class="conteudo">
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li>fichas</li>
+                    <li>suporte</li>
+                    <li><a href="https://jamboeditora.com.br/categoria/rpg/ordem-paranormal/">ordem paranormal</a></li>
+                </ul>
+            </div>
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="#sobreNos">projeto S.A.M.U</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="traço"></div>
+        <!------------------------------------------------------------->
+
+        <div class="conteudo">
+
+            <div class="trindade">
+                <p>email</p>
+                <a href="https://mail.google.com/mail/u/0/#inbox">
+                    <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                        alt="email logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>twitter</p>
+                <a href="https://twitter.com/petscortz">
+                    <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>discord</p>
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                    alt="discord logo" class="img">
+            </div>
+        </div>
+
+    </footer>
+
+
+
+
+</body>
+
+</html>
+
+
+<script>
+
+    function validarSessao() {
+
+        console.log('legal')
+        var nickUsuario = sessionStorage.NICK_USUARIO;
+
+        if (nickUsuario == null) {
+            nomeUsuario_span.innerHTML = ``
+        }
+        else {
+            nomeUsuario_span.innerHTML = nickUsuario
+        }
+
+    }
+
+</script>

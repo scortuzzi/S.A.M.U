@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.A.M.U - Fichas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/img/logo.png">
+</head>
+
+<body onload="validarSessao(), trazerFicha()">
+
+    <header class="displaySpace identidade">
+
+        <div>
+            <h1>S.A.M.U</h1>
+        </div>
+
+        <div class="botoes displaySpace">
+            <span class="aqui">fichas</span>
+            <span><a href="index.html">home</a></span>
+            <div class="barrinha"></div>
+            <span><a href="login.html">login</a></span>
+            <span><a href="cadastro.html">cadastro</a></span>
+
+            <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
+
+            <div class="user"></div>
+            <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+
+        </div>
+
+    </header>
+
+    <!-- fim da header -->
+
+    <div class="flexivel">
+
+        <div class="fichas"  id="cards_div">
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <footer class="identidade trindade" style="margin-top: 300px;">
+
+        <div>
+            <h1 class="underline">S.A.M.U</h1>
+        </div>
+
+        <div class="conteudo">
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li>fichas</li>
+                    <li>suporte</li>
+                    <li><a href="https://jamboeditora.com.br/categoria/rpg/ordem-paranormal/">ordem paranormal</a></li>
+                </ul>
+            </div>
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="#sobreNos">projeto S.A.M.U</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="traço"></div>
+        <!------------------------------------------------------------->
+
+        <div class="conteudo">
+
+            <div class="trindade">
+                <p>email</p>
+                <a href="https://mail.google.com/mail/u/0/#inbox">
+                    <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                        alt="email logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>twitter</p>
+                <a href="https://twitter.com/petscortz">
+                    <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>discord</p>
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                    alt="discord logo" class="img">
+            </div>
+        </div>
+
+    </footer>
+
+
+
+</body>
+
+</html>
+
+<script>
+
+    function validarSessao() {
+
+        var nickUsuario = sessionStorage.NICK_USUARIO;
+
+        if (nickUsuario == null) {
+            nomeUsuario_span.innerHTML = ``
+        }
+        else {
+            nomeUsuario_span.innerHTML = nickUsuario
+        }
+    }
+
+    function trazerFicha() {
+
+        var idVar = sessionStorage.ID_USUARIO;
+
+
+        fetch(`/personagem/listar/${idVar}`, {
+            cache: 'no-store'
+        })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    
+                    plotarInformacoes(resposta);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+
+        function plotarInformacoes(resposta) {
+
+            for (i = 0; i < resposta.length; i++) {
+
+                cards_div.innerHTML += `
+            
+            <div class="cards">
+
+                <div class="personagemCard" id="${resposta[i].idFicha}" onclick="escolherFicha(this.id)"> 
+    
+                    <div style="display: flex; justify-content: space-around;">
+                        <img src="assets/img/pfp.png" alt="" class="personagemImagem">
+                        <h3 id="nomePersonagem_span">${resposta[i].nomePersonagem}</h3>
+                    </div>
+
+
+                    <div class="displaySpace" style="padding: 0px 20px;">
+                        <span style="color: red; font-weight: bold;">remover</span>
+                        <a href="fichaPersonagem.html"><button>Ficha</button></a>
+                    </div>
+
+                </div>
+
+            </div>
+            `
+
+            }
+        }
+    }
+
+        function escolherFicha(id) {
+
+            console.log(id)
+            sessionStorage.FICHA = id
+        }
+
+
+
+
+
+</script>

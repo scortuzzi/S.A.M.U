@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D20 - Origens</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/criador.css">
+    <link rel="icon" href="assets/img/logo.png">
+
+    <script src="./js/sessao.js"></script>
+</head>
+
+<body onload="validarSessao()">
+
+
+    <header class="displaySpace identidade">
+
+        <div>
+            <h1>S.A.M.U</h1>
+        </div>
+
+        <div class="botoes displaySpace">
+            <span><a href="fichas.html">fichas</a></span>
+            <span><a href="index.html">home</a></span>
+            <div class="barrinha"></div>
+            <span><a href="login.html">login</a></span>
+            <span><a href="cadastro.html">cadastro</a></span>
+
+            <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
+            
+            <div class="user"></div>
+            <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+
+        </div>
+
+    </header>
+
+
+    <div class="flexivel">
+
+        <div class="AOT">
+            <div class="navbar">
+
+                <h2><a href="atributos.html">Atributos</a></h2>
+
+                <h2 id="tracinho"></h2>
+
+                <h2 id="Processo">Origens</h2>
+
+                <h2 id="tracinho"></h2>
+
+                <h2><a href="toques.html">Toques Finais</a></h2>
+
+            </div> <!-- fim da navbar -->
+        </div>
+
+        <div class="corpoOrigem">
+
+            <div style="display: flex;">
+
+                <div class="origensCampo">
+
+                    <div class="tutorialOrigem">
+                        <p>As origens determinam o que o seu personagem fazia antes de entrar para ordem e decreta que
+                            tipo de vida ele vivia,
+                            cada origem, além do seu impacto na narrativa, também concede 2 perícias adicionais e um
+                            poder especial que pode
+                            ser utilizado durante a campanha
+                        </p>
+                    </div>
+
+                    <div class="origens">
+
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="academico">
+                            <div class="origensBox">
+                                <span>Acadêmico</span>
+                                
+                                <div class="trindade">
+                                    <span style="color: greenyellow;">perícia</span><br>
+                                    <span>ciências</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="agenteSaude">
+                            <div class="origensBox">
+                                <span>Agente da saúde</span>
+                                
+                                <div class="trindade">
+                                    <span style="color: greenyellow;">perícia</span><br>
+                                    <span>medicina</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="amnesico">
+                            <div class="origensBox">
+                                <span>Amnésico</span>
+                                
+                                <div class="trindade">
+                                    <span style="color: greenyellow;">perícia</span><br>
+                                    <span>uma à escolha<br>do mestre</span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="artista">
+                            <div class="origensBox">
+                                <span>Artista</span>
+                                
+                                <div class="trindade">
+                                    <span style="color: greenyellow;">perícia</span><br>
+                                    <span>artes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="atleta">
+                            <div class="origensBox">
+                                <span>Atleta</span>
+                                
+                                <div class="trindade">
+                                    <span style="color: greenyellow;">perícia</span><br>
+                                    <span>atletismo</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="identidade trindade">
+
+        <div>
+            <h1 class="underline">S.A.M.U</h1>
+        </div>
+
+        <div class="conteudo">
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li>fichas</li>
+                    <li>suporte</li>
+                    <li><a href="https://jamboeditora.com.br/categoria/rpg/ordem-paranormal/">ordem paranormal</a></li>
+                </ul>
+            </div>
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="#sobreNos">projeto S.A.M.U</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="traço"></div>
+        <!------------------------------------------------------------->
+
+        <div class="conteudo">
+
+            <div class="trindade">
+                <p>email</p>
+                <a href="https://mail.google.com/mail/u/0/#inbox">
+                    <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                        alt="email logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>twitter</p>
+                <a href="https://twitter.com/petscortz">
+                    <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>discord</p>
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                    alt="discord logo" class="img">
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+
+    function validarSessao() {
+
+        var nickUsuario = sessionStorage.NICK_USUARIO;
+
+        if (nickUsuario == null) {
+            nomeUsuario_span.innerHTML = ``
+        }
+        else {
+            nomeUsuario_span.innerHTML = nickUsuario
+        }
+    }
+
+    function escolherOrigem(idSelecionado) {
+
+        sessionStorage.origem = idSelecionado;
+        window.location = 'toques.html'
+    }
+    
+
+</script>
