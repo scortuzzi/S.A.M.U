@@ -8,6 +8,15 @@ function listar() {
     return database.executar(instrucao);
 }
 
+function listarAtributos(idFicha) {
+    var instrucao = `
+        select agilidade, inteligencia, vigor, presenca, forca from ficha where idFicha = ${idFicha};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
 function cadastrar(idFicha, idPericia) {
     var instrucao = `
         INSERT INTO fichaPericia VALUES (${idFicha}, ${idPericia}, 0);
@@ -16,7 +25,9 @@ function cadastrar(idFicha, idPericia) {
     return database.executar(instrucao);
 }
 
+
 module.exports = {
     cadastrar,
+    listarAtributos,
     listar
 };

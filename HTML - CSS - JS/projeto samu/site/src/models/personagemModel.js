@@ -2,24 +2,25 @@ var database = require("../database/config")
 
 function listar(id) {
     var instrucao = `
-        SELECT 
-        
-        ficha.idFicha,
-        ficha.nomePersonagem,
-        usuario.nick,
-        ficha.agilidade,
-        ficha.inteligencia,
-        ficha.vigor,
-        ficha.presenca,
-        ficha.forca,
-        ficha.classe,
-        origem.nomeOrigem
+    select 
+    ficha.idFicha,
+    ficha.vida,
+    ficha.sanidade,
+    ficha.pe,
+    ficha.agilidade,
+    ficha.inteligencia,
+    ficha.vigor,
+    ficha.presenca,
+    ficha.forca,
+    ficha.nomePersonagem,
+    ficha.fkUsuario,
+    ficha.fkOrigem,
+    ficha.classe
+    
 
-        FROM ficha
-        join usuario on idUsuario = fkUsuario
-        join origem on idOrigem = fkOrigem
-        
-        where fkUsuario = ${id};
+    from ficha
+    join usuario on fkUsuario = idUsuario
+    where fkUsuario = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -28,11 +29,11 @@ function listar(id) {
 
 
 
-function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem) {
+function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem, vida, san, pe) {
     var instrucao = `
-    insert into ficha (nomePersonagem, fkUsuario, agilidade, inteligencia, vigor, presenca, forca, classe, fkOrigem) values
+    insert into ficha (nomePersonagem, fkUsuario, agilidade, inteligencia, vigor, presenca, forca, classe, fkOrigem, vida, sanidade, pe) values
     
-    ('${nomePersonagem}', '${id}', '${agi}', '${int}', '${vig}', '${pre}', '${forc}', '${classe}', (select origem.idOrigem from origem where nomeOrigem = '${origem}') );
+    ('${nomePersonagem}', '${id}', '${agi}', '${int}', '${vig}', '${pre}', '${forc}', '${classe}',(select origem.idOrigem from origem where nomeOrigem = '${origem}'),  ${vida}, ${san}, ${pe});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

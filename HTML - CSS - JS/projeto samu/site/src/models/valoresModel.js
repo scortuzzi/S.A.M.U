@@ -17,7 +17,18 @@ function cadastrar(idFicha, idPericia, valor) {
     return database.executar(instrucao);
 }
 
+function cadastrarHP(idFicha, idStatus, valor) {
+    var instrucao = `
+
+        UPDATE ficha set ${idStatus} = ${valor} where idFicha = ${idFicha};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
 module.exports = {
     cadastrar,
+    cadastrarHP,
     listar
 };

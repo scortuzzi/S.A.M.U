@@ -18,6 +18,7 @@ var fichaRouter = require("./src/routes/ficha");
 var periciaRouter = require("./src/routes/pericia");
 var valoresRouter = require("./src/routes/valores");
 var insercaoRouter = require("./src/routes/insercao");
+var analyticsRouter = require("./src/routes/analytics");
 
 // ---------------------------
 
@@ -37,6 +38,7 @@ app.use("/ficha", fichaRouter);
 app.use("/pericia", periciaRouter);
 app.use("/valores", valoresRouter);
 app.use("/insercao", insercaoRouter);
+app.use("/analytics", analyticsRouter);
 
 // ---------------------------
 

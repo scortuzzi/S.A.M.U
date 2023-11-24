@@ -13,7 +13,11 @@ function listar(id) {
         ficha.presenca,
         ficha.forca,
         ficha.classe,
-        origem.nomeOrigem
+        origem.nomeOrigem,
+
+        ficha.vida,
+        ficha.sanidade,
+        ficha.pe
 
         FROM ficha
         join usuario on idUsuario = fkUsuario
@@ -26,7 +30,7 @@ function listar(id) {
 }
 
 
-function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem) {
+function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem, vida, sanidade, pe) {
     var instrucao = `
     insert into ficha (nomePersonagem, fkUsuario, agilidade, inteligencia, vigor, presenca, forca, classe, fkOrigem) values
     

@@ -12,13 +12,14 @@
     <script src="./js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), analytics()">
 
 
     <header class="displaySpace identidade">
 
         <div>
             <h1>S.A.M.U</h1>
+            <span><a href="analytics.html">analytics</a></span>
         </div>
 
         <div class="botoes displaySpace">
@@ -300,11 +301,12 @@
 
 
 <script>
+    
+    
+    var nickUsuario = sessionStorage.NICK_USUARIO;
 
     function validarSessao() {
 
-        console.log('legal')
-        var nickUsuario = sessionStorage.NICK_USUARIO;
 
         if (nickUsuario == null) {
             nomeUsuario_span.innerHTML = ``
@@ -314,5 +316,18 @@
         }
 
     }
+
+    function analytics() {
+
+        fetch(`/analytics/cadastrar/${nickUsuario}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+  }
+
+
+    
 
 </script>

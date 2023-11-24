@@ -11,6 +11,19 @@ function listar(req, res) {
     })
 }
 
+
+function listarAtributos(req, res) {
+    
+    var idFicha = req.params.fichaServer;
+    
+    insercaoModel.listarAtributos(idFicha).then(function(resultado){
+    
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 function cadastrar(req, res) {
 
     var idFicha = req.params.idFicha;
@@ -24,7 +37,9 @@ function cadastrar(req, res) {
     })
 }
 
+
 module.exports = {
     listar,
+    listarAtributos,
     cadastrar
 }

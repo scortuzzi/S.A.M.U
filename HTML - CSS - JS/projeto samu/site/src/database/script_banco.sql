@@ -108,30 +108,46 @@ constraint FKFf foreign key (fkFicha) references ficha(idFicha),
 constraint FKPf foreign key (fkPericia) references pericia(idPericia)
 );
 
-select * from fichaPericia;
+create table analytics (
+idAnalytics int primary key auto_increment,
+nomeUsuario varchar(45),
+dataHora datetime default current_timestamp
+) auto_increment = 10000;
 
-        SELECT
+insert into analytics (nomeUsuario) values
 
-        ficha.idFicha,
-        ficha.nomePersonagem,
-        usuario.nick,
-        ficha.agilidade,
-        ficha.inteligencia,
-        ficha.vigor,
-        ficha.presenca,
-        ficha.forca,
-        ficha.classe,
-        origem.nomeOrigem
 
-        FROM ficha
-        join usuario on idUsuario = fkUsuario
-        join origem on idOrigem = fkOrigem
 
-        where fkUsuario = 100;
-        
-        select * from usuario;
-        select * from ficha;
-        
-        select * from fichaPericia;
-        
-                SELECT * FROM fichaPericia where fkFicha = 1001;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select avg(agilidade), avg(inteligencia), avg(presenca), avg(vigor), avg(forca) from ficha;
+select * from ficha;
+
+select 
+	round(avg(agilidade), 0), 
+    round(avg(inteligencia), 0), 
+    round(avg(vigor), 0), 
+    round(avg(presenca), 0),
+    round(avg(forca), 0)
+    from ficha;
+    
+select 
+	sum(agilidade),
+    sum(inteligencia),
+    sum(vigor),
+    sum(presenca),
+    sum(forca)
+    from ficha;
+    

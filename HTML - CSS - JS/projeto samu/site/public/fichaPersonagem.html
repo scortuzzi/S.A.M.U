@@ -118,17 +118,17 @@
 
                 <div class="simulacao" style="margin-top: 30px;">
                     <span>HP</span>
-                    <div class="bar" id="hp">12/12</div>
+                    <input class="bar" id="vida" onkeyup="mudarHP(this.id)">
                 </div>
 
                 <div class="simulacao">
                     <span>SAN</span>
-                    <div class="bar" id="san">7/7</div>
+                    <input class="bar" id="sanidade" onkeyup="mudarHP(this.id)">
                 </div>
 
                 <div class="simulacao">
                     <span>pe</span>
-                    <div class="bar" id="pe">5/5</div>
+                    <input class="bar" id="pe" onkeyup="mudarHP(this.id)">
                 </div>
 
 
@@ -151,50 +151,52 @@
 
                 <h3>dados</h3>
 
-                <span> (AGI) </span>
-                <span> (PRE) </span>
-                <span> (PRE) </span>
-                <span> (FOR) </span>
-                <span> (INT) </span>
-                <span> (INT) </span>
-                <span> (AGI) </span>
-                <span> (PRE) </span>
-                <span> (PRE) </span>
-                <span> (VIG) </span>
-                <span> (AGI) </span>
-                <span> (AGI) </span>
-                <span> (PRE) </span>
-                <span> (PRE) </span>
-                <span> (INT) </span>
-                <span> (FOR) </span>
-                <span> (INT) </span>
-                <span> (INT) </span>
-                <span> (PRE) </span>
-                <span> (AGI) </span>
-                <span> (AGI) </span>
-                <span> (INT) </span>
-                <span> (AGI) </span>
-                <span> (PRE) </span>
-                <span> (INT) </span>
-                <span> (INT) </span>
-                <span> (INT) </span>
-                <span> (PRE) </span>
+                <span id="atributo1000" class="atributobase">(AGI)</span>
+                <span id="atributo1001" class="atributobase">(PRE)</span>
+                <span id="atributo1002" class="atributobase">(PRE)</span>
+                <span id="atributo1003" class="atributobase">(FOR)</span>
+                <span id="atributo1004" class="atributobase">(INT)</span>
+                <span id="atributo1005" class="atributobase">(INT)</span>
+                <span id="atributo1006" class="atributobase">(AGI)</span>
+                <span id="atributo1007" class="atributobase">(PRE)</span>
+                <span id="atributo1008" class="atributobase">(PRE)</span>
+                <span id="atributo1009" class="atributobase">(VIG)</span>
+                <span id="atributo1010" class="atributobase">(AGI)</span>
+                <span id="atributo1011" class="atributobase">(AGI)</span>
+                <span id="atributo1012" class="atributobase">(PRE)</span>
+                <span id="atributo1013" class="atributobase">(PRE)</span>
+                <span id="atributo1014" class="atributobase">(INT)</span>
+                <span id="atributo1015" class="atributobase">(FOR)</span>
+                <span id="atributo1016" class="atributobase">(INT)</span>
+                <span id="atributo1017" class="atributobase">(INT)</span>
+                <span id="atributo1018" class="atributobase">(PRE)</span>
+                <span id="atributo1019" class="atributobase">(AGI)</span>
+                <span id="atributo1020" class="atributobase">(AGI)</span>
+                <span id="atributo1021" class="atributobase">(INT)</span>
+                <span id="atributo1022" class="atributobase">(AGI)</span>
+                <span id="atributo1023" class="atributobase">(PRE)</span>
+                <span id="atributo1024" class="atributobase">(INT)</span>
+                <span id="atributo1025" class="atributobase">(INT)</span>
+                <span id="atributo1026" class="atributobase">(INT)</span>
+                <span id="atributo1027" class="atributobase">(PRE)</span>
 
             </div>
 
             <div class="colunaNumeros"></div>
 
 
+
             <div class="colunaNumeros" id="listaValores_div">
 
                 <h3>Bônus</h3>
-
- 
 
             </div>
 
         </div>
 
+        <div class="areaDado" id="boxDados">
+
+        </div>
     </div>
 
 
@@ -258,9 +260,9 @@
 </html>
 
 <script>
-    
-    
-    
+
+
+
     var idFichaVar = sessionStorage.FICHA
 
     function validarSessao() {
@@ -321,6 +323,12 @@
             origemSpan.innerHTML = origem;
             classeSpan.innerHTML = classe;
 
+            sessionStorage.agilidade = resposta[0].agilidade;
+            sessionStorage.intelecto = resposta[0].inteligencia;
+            sessionStorage.vigor = resposta[0].vigor;
+            sessionStorage.presenca = resposta[0].presenca;
+            sessionStorage.forca = resposta[0].forca;
+
 
             agilidade_input.value = agilidade
             inteligencia_input.value = inteligencia;
@@ -328,9 +336,58 @@
             presenca_input.value = presenca;
             forca_input.value = forca;
 
-
+            vida.value = resposta[0].vida;
+            sanidade.value = resposta[0].sanidade;
+            pe.value = resposta[0].pe;
         }
     }
+
+    // daqui para baixo nós vamos buscar os valores das perícias dentro do banco apartir da tabela fichaPericia, 
+    // se não houver nenhum dado inserido nela, o sistema exibe o valor como 0, se ja houver, o sistema
+    // o exibe ao lado de sua respectiva perícia
+
+
+    // passo 1, buscar valor por valor
+    fetch(`/valores/listar/${idFichaVar}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+
+                exibirvalores(resposta);
+                console.log(resposta)
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+            exibirvalores(resposta);
+        }
+    })
+
+
+    // passo 2, exibir o valor encontrado
+    function exibirvalores(resposta) {
+
+        var i = 0;
+
+        while (i <= 27) {
+
+            listaValores_div.innerHTML += `
+                    <span>  <input id="${i}" type="number" class="bônus" onkeyup="mudarBonus(this.id)" value="${resposta[i].valor}">  </span>
+                    `
+
+            var valorPericia = document.getElementById(i);
+
+            if (valorPericia.value > 5) {
+                valorPericia.style.color = 'rgb(92, 203, 92)'
+            }
+
+            i += 1;
+
+        }
+
+
+    }
+    
+
 
     //uma função para receber o nome de todas as perícias
     function listarPericias() {
@@ -354,93 +411,180 @@
         // usando um laço de repetição
         function exibirPericias(resposta) {
 
+
+
             for (i = 0; i <= 27; i++) {
 
-                listaPericias_div.innerHTML += `
-                    <div> <img src="assets/img/logo.png" id="${resposta[i].nomePericia}"> <span>${resposta[i].nomePericia}</span> </div>
-                    `
+                var valor = document.getElementById(i)
 
+                if (valor.value > 5) {
+
+                    listaPericias_div.innerHTML += `
+            <div> <img src="assets/img/logo.png" id="${resposta[i].idPericia}" onclick="rolarDados(this.id)"> <span style="color: rgb(92, 203, 92);" class="periciaNome" id="${resposta[i].nomePericia}">${resposta[i].nomePericia}</span> </div>
+            `
+                }
+                else {
+                    listaPericias_div.innerHTML += `
+            <div> <img src="assets/img/logo.png" id="${resposta[i].idPericia}" onclick="rolarDados(this.id)"> <span  class="periciaNome" id="${resposta[i].nomePericia}">${resposta[i].nomePericia}</span> </div>
+            `
+                }
             }
         }
-
-        // daqui para baixo nós vamos buscar os valores das perícias dentro do banco apartir da tabela fichaPericia, 
-        // se não houver nenhum dado inserido nela, o sistema exibe o valor como 0, se ja houver, o sistema
-        // o exibe ao lado de sua respectiva perícia
-
-
-
-
-        // boa noite peter do passado, espero que tenha tido uma ótima sessão...
-        // eu deixei algumas coisas para você fazer hoje, a última coisa muahahahahaah
-        // fazer os valores de bônus aparecer na direitinha, boa sorte com o select de fdp ae
-        // mama meo pau
-        
-
-            // passo 1, buscar valor por valor
-            fetch(`/valores/listar/${idFichaVar}`, { cache: 'no-store' }).then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (resposta) {
-
-                        exibirvalores(resposta);
-                        console.log(resposta)
-
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                    exibirvalores(resposta);
-                }
-            })
-
-
-            // passo 2, exibir o valor encontrado
-            function exibirvalores(resposta) {
-
-                var i = 0;
-                
-                while (i <= 27) {
-
-
-
-                    listaValores_div.innerHTML += `
-                    <span>  <input id="${i}" type="number" class="bônus" onkeyup="mudarBonus(this.id)" value="${resposta[i].valor}">  </span>
-                    `
-                
-                    i += 1;
- 
-                }
-                
-
-            }
-
-        }
-
-    
+    }
 
 
     function mudarBonus(id) {
 
-        
+        //a id é a das inputs que mudam com os valores do usuário
         var input = document.getElementById(id)
-        var valor = input.value
+        var valor = input.value //recebe o valor dentro da input
         console.log(id)
 
-        fetch(`/valores/alterar/${Number(idFichaVar)}/${Number(id)+100}/${valor}`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+        var parametro = id // apenas para receber o número desta id para ser usada como parametro
 
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
+        var pericia = document.getElementsByClassName("periciaNome")[parametro]
 
-      });
-    return false;
-  }
+        // lista todos os elementos com esta classe, no caso 27, e usa o id da input que varia dentre 0-27, para que altere a cor
+        // da span na mesma posição que a input
 
 
+        if (valor > 5) {
+            input.style.color = 'rgb(92, 203, 92)'
+            pericia.style.color = 'rgb(92, 203, 92)'
+        }
+
+
+        console.log(input)
+        fetch(`/valores/aumentar/${Number(idFichaVar)}/${Number(id) + 100}/${valor}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+        return false;
+    }
+
+    function mudarHP(id) {
+
+
+        var status = document.getElementById(id)
+        var valor = status.value
+        console.log(id)
+        console.log(status)
+
+        fetch(`/valores/alterar/${Number(idFichaVar)}/${id}/${valor}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+        return false;
+    }
+
+
+    //função de rolagem de dados
+
+    var agilidade = sessionStorage.agilidade;
+    var intelecto = sessionStorage.intelecto;
+    var vigor = sessionStorage.vigor;
+    var presenca = sessionStorage.presenca;
+    var forca = sessionStorage.forca;
+
+
+    function rolarDados(id) {
+
+        var periciaValor = document.getElementById(id - 100);
+
+        var atributoParametro = id - 100
+
+
+        var atributo = document.getElementsByClassName("atributobase")[atributoParametro].innerHTML
+        var pericia = document.getElementsByClassName("periciaNome")[atributoParametro].innerHTML
+
+        // console.log(parseInt(Math.random() * 20 + 1 + Number(periciaValor.value)))
+
+        console.log(atributo)
+        console.log(atributoParametro)
+        var qtdDados = 1;
+        var eh0 = false;
+
+        if (atributo == '(AGI)') {
+            qtdDados = agilidade
+        }
+        else if (atributo == '(INT)') {
+            qtdDados = intelecto
+        }
+        else if (atributo == '(VIG)') {
+            qtdDados = vigor
+        }
+        else if (atributo == '(FOR)') {
+            qtdDados = forca
+        }
+        else if (atributo == '(PRE)') {
+            qtdDados = presenca
+        }
+        if (qtdDados == 0) {
+            qtdDados = 2;
+            eh0 = true;
+        }
+
+
+
+        boxDados.innerHTML = `
+    <div id="dado" onclick="apagar()">${pericia}<br> [</div>
+    `
+
+        var maiorResultado = 0;
+        var menorResultado = 20;
+
+        for (i = 1; i <= qtdDados; i++) {
+            var rolagem = parseInt(Math.random() * 20 + 1)
+
+            dado.innerHTML += `
+        ${rolagem}
+        `
+
+            if (maiorResultado < rolagem) {
+                maiorResultado = rolagem
+            }
+            if (menorResultado > rolagem) {
+                menorResultado = rolagem
+            }
+        }
+
+        if (eh0 == true) {
+            dado.innerHTML += `] +  ${periciaValor.value}
+    <br>
+    <b class="maiorDado" style="color: red;"> ${menorResultado + Number(periciaValor.value)}</b>
+    `
+        }
+
+        else {
+            dado.innerHTML += `] +  ${periciaValor.value}
+    <br>
+    <b class="maiorDado"> ${maiorResultado + Number(periciaValor.value)}</b>
+    `
+        }
+    }
+
+    function apagar() {
+        boxDados.innerHTML = ``
+    }
 
 </script>

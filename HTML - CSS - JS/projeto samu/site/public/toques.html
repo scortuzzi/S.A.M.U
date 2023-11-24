@@ -81,7 +81,7 @@
                                     <option value="oculstista">oculstista</option>
                                 </select>
                             </div>
-                            <button onclick="cadastroPersonagem()">Finalizar</button>
+                            <button onclick="cadastroPersonagem(), cadastroPersonagemHP()">Finalizar</button>
                         </div>
 
                         <div class="descricao">
@@ -165,6 +165,8 @@
 
 <script>
 
+    var idVar = sessionStorage.ID_USUARIO
+
     function validarSessao() {
 
         console.log('legal')
@@ -179,9 +181,24 @@
 
     }
 
+    // está função coloca todos os dados da criação de ficha dentro do banco de dados, desde os atributos, vida, nome, classe e origem
     function cadastroPersonagem() {
 
-        var idVar = sessionStorage.ID_USUARIO
+        var vida = 20 + Number(sessionStorage.vigor)
+        var san = 12;
+        var pe = 2 + sessionStorage.presença
+
+        if (classePersonagem_input == 'especialista') {
+            vida = 16 + Number(sessionStorage.vigor)
+            san = 16
+            pe = 3 + Number(sessionStorage.presença)
+        }
+        else if (classePersonagem_input == 'ocultista') {
+            vida = 12 + Number(sessionStorage.vigor)
+            san = 20;
+            pe = 4 + Number(sessionStorage.presença)
+        }
+
         var personagemVar = personagemNome_input.value;
         var classeVar = classePersonagem_input.value;
 
@@ -192,8 +209,6 @@
         var forcaVar = sessionStorage.força;
 
         var origemVar = sessionStorage.origem;
-
-        teste.innerHTML = idVar
 
         fetch("/personagem/cadastrar", {
             method: "POST",
@@ -212,12 +227,17 @@
                 presencaServer: presencaVar,
                 forcaServer: forcaVar,
 
-                origemServer: origemVar
+                origemServer: origemVar,
+
+                vidaServer: vida,
+                sanServer: san,
+                peServer: pe
 
             }),
         })
 
 
+        // esta função pega o id da ficha que nós acabamos de criar
         fetch(`/insercao/listar/`, {
             cache: 'no-store'
         })
@@ -228,9 +248,9 @@
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         resposta.reverse();
 
-                        
+
                         insercao(resposta);
-                        
+
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
@@ -240,34 +260,31 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+            // ----------------------------------------------------------
 
 
+            // esta função faz 28 inserts dentro da tabela fichaPericia, com cada uma pericia sendo setada como zero
         function insercao(resposta) {
 
 
-            for (i = 100; i <= 127; i ++) {
+            for (i = 100; i <= 127; i++) {
 
-            fetch(`/insercao/cadastrar/${resposta[0].idFicha}/${i}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            })
-        }
+                fetch(`/insercao/cadastrar/${resposta[0].idFicha}/${i}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                })
+            }
         }
 
         setTimeout(() => {
-            
+
             window.location = 'fichas.html'
         }, 2000);
 
 
     }
-
-
-
-
-
 
 
 </script>

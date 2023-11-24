@@ -28,7 +28,21 @@ function cadastrar(req, res) {
     })
 }
 
+function cadastrarHP(req, res) {
+
+    var idFicha = req.params.idFicha;
+    var idStatus = req.params.idStatus
+    var valor = req.params.valor;
+
+    valoresModel.cadastrarHP(idFicha, idStatus, valor).then(function(resposta){
+        res.status(200).send("valor inserido com sucesso");
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 module.exports = {
     listar,
+    cadastrarHP,
     cadastrar
 }

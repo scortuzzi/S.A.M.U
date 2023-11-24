@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.A.M.U - Fichas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/img/logo.png">
+</head>
+
+<body onload="validarSessao(), trazerFicha()">
+
+    <header class="displaySpace identidade">
+
+        <div>
+            <h1>S.A.M.U</h1>
+        </div>
+
+        <div class="botoes displaySpace">
+            <span class="aqui">fichas</span>
+            <span><a href="index.html">home</a></span>
+            <div class="barrinha"></div>
+            <span><a href="login.html">login</a></span>
+            <span><a href="cadastro.html">cadastro</a></span>
+
+            <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
+
+            <div class="user"></div>
+            <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+
+        </div>
+
+    </header>
+
+    <!-- fim da header -->
+
+    <div class="flexivel trindade">
+
+        <span>média de atributos</span>
+
+        <div class="analytics">
+            <span id="agilidade"></span>
+            <span id="intelecto"></span>
+            <span id="vigor"></span>
+            <span id="presenca"></span>
+            <span id="forca"></span>
+        </div> <br>
+
+        <span>soma de todos os atributos</span>
+
+        <div class="analytics">
+            <span id="Somaagilidade"></span>
+            <span id="Somaintelecto"></span>
+            <span id="Somavigor"></span>
+            <span id="Somapresenca"></span>
+            <span id="Somaforca"></span>
+        </div><br>
+
+        <span>esse tanto de usuarios ja entraram no site:</span>
+
+        <div class="analytics">
+            <span id="esseTanto"></span>
+        </div> <br>
+
+        <span>esse tanto de usuarios entraram no site deslogados:</span>
+
+        <div class="analytics">
+            <span id="esseTantoDeslogados"></span>
+        </div> <br>
+        
+        <span>existem esse tanto de fichas registradas:</span>
+
+        <div class="analytics">
+            <span id="quantasFichas"></span>
+        </div> 
+
+
+    </div>
+
+
+    <footer class="identidade trindade" style="margin-top: 300px;">
+
+        <div>
+            <h1 class="underline">S.A.M.U</h1>
+        </div>
+
+        <div class="conteudo">
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li>fichas</li>
+                    <li>suporte</li>
+                    <li><a href="https://jamboeditora.com.br/categoria/rpg/ordem-paranormal/">ordem paranormal</a></li>
+                </ul>
+            </div>
+
+            <div id="listinhaFooter">
+                <ul>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="#sobreNos">projeto S.A.M.U</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="traço"></div>
+        <!------------------------------------------------------------->
+
+        <div class="conteudo">
+
+            <div class="trindade">
+                <p>email</p>
+                <a href="https://mail.google.com/mail/u/0/#inbox">
+                    <img src="https://www.nicepng.com/png/full/22-221651_c0cf03-email-icon-png-transparent-white.png"
+                        alt="email logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>twitter</p>
+                <a href="https://twitter.com/petscortz">
+                    <img src="https://www.al.al.leg.br/imagens/Twitterlogo.png/image" alt="twitter logo" class="img">
+                </a>
+            </div>
+
+            <div class="trindade">
+                <p>discord</p>
+                <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                    alt="discord logo" class="img">
+            </div>
+        </div>
+
+    </footer>
+
+
+
+</body>
+</html>
+
+<script>
+
+// mostra a média de atributos
+fetch(`/analytics/listarMedia/`, {
+            cache: 'no-store'
+        })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    
+                    mostrarMedia(resposta);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            function mostrarMedia(resposta) {
+
+                agilidade.innerHTML = resposta[0].agilidade
+                intelecto.innerHTML = resposta[0].inteligencia
+                vigor.innerHTML = resposta[0].vigor
+                presenca.innerHTML = resposta[0].presenca
+                forca.innerHTML = resposta[0].forca
+
+
+            }
+
+// mostra a soma de todos os atributos ja registrados
+            fetch(`/analytics/listarSoma/`, {
+            cache: 'no-store'
+        })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    
+                    mostrarSoma(resposta);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            function mostrarSoma(resposta) {
+
+                Somaagilidade.innerHTML = resposta[0].agilidadaSoma
+                Somaintelecto.innerHTML = resposta[0].intelectoSoma
+                Somavigor.innerHTML = resposta[0].vigorSoma
+                Somapresenca.innerHTML = resposta[0].presencaSoma
+                Somaforca.innerHTML = resposta[0].forcaSoma
+            }
+
+// mostra a quantidade de usuarios diferentes ja fizeram login
+            fetch(`/analytics/listarUsuarios/`, {
+            cache: 'no-store'
+        })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    
+                    mostrarUsuarios(resposta);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            function mostrarUsuarios(resposta) {
+
+                esseTanto.innerHTML = resposta[0].quantos
+
+            }
+
+// mostra a quantidade de acessos de usuarios deslogados
+            fetch(`/analytics/listarUsuariosUndefined/`, {
+            cache: 'no-store'
+        })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    
+                    mostrarUsuariosU(resposta);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            function mostrarUsuariosU(resposta) {
+
+                esseTantoDeslogados.innerHTML = resposta[0].deslogados
+
+            }
+
+// para mostrar quantas fichas existem no banco de dados
+
+fetch(`/analytics/listarFichas/`, {
+            cache: 'no-store'
+        })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    
+                    mostrarFichas(resposta);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            function mostrarFichas(resposta) {
+
+                quantasFichas.innerHTML = resposta[0].quantasFichas
+
+            }
+
+
+
+    
+
+
+
+</script>
