@@ -17,7 +17,9 @@ function listar(id) {
 
         ficha.vida,
         ficha.sanidade,
-        ficha.pe
+        ficha.pe,
+        
+        ficha.imagemPersonagem
 
         FROM ficha
         join usuario on idUsuario = fkUsuario

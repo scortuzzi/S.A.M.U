@@ -28,11 +28,13 @@
 }
 
 .tutorial2 {
-    width: 80%;
+    width: 100%;
     font-size: 20px;
     display: flex;
+    justify-content: start;
     align-items: center;
     padding-top: 20px;
+    margin-left: 60px;
 }
 
 .tutorial p {
@@ -151,6 +153,12 @@ input {
     font-size: 20px;
     border-radius: 10px;
     border: 0;
+    transition: 0.6s;
+}
+
+.inputsPersonagem button:hover {
+    width: 180px;
+    color: green;
 }
 
 .inputsPersonagem input{
@@ -182,10 +190,16 @@ input {
     margin-right: 5px;
     text-align: center;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+.origemSelect:hover {
+    width: 270px;
 }
 
 .toquesFinais {
     height: 500px;
+    width: 100%;
     /* background-color: red; */
 }
 
@@ -224,4 +238,59 @@ select {
     flex-direction: column;
     justify-content: space-around;
     
+}
+
+.classeContainer {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.classesBox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.classePersonagem {
+    background-color: #1b1b1b;
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+    justify-content: space-around;
+    padding-top: 10px;
+    transition: 0.5s;
+}
+
+.classePersonagem:hover {
+    width: 370px;
+    height: 380px;
+}
+
+.status {
+    height: 50%;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.caracteristicas {
+    height: 100%;
+    font-size: 20px;
+    align-items: start;
+    justify-content: space-evenly;
+}
+
+.cor {
+    color: greenyellow;
+}
+
+
+.numeros {
+    text-align: start;
+    height: 100%;
+    font-size: 20px;
+    align-items: start;
+    justify-content: space-evenly;
 }

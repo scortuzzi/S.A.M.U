@@ -29,7 +29,7 @@
             <span><a href="cadastro.html">cadastro</a></span>
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
-            
+
             <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
@@ -76,7 +76,7 @@
                         <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Acadêmico">
                             <div class="origensBox">
                                 <span>Acadêmico</span>
-                                
+
                                 <div class="trindade">
                                     <span style="color: greenyellow;">perícia</span><br>
                                     <span>ciências</span>
@@ -87,7 +87,7 @@
                         <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Agente da saúde">
                             <div class="origensBox">
                                 <span>Agente da saúde</span>
-                                
+
                                 <div class="trindade">
                                     <span style="color: greenyellow;">perícia</span><br>
                                     <span>medicina</span>
@@ -98,7 +98,7 @@
                         <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Amnésico">
                             <div class="origensBox">
                                 <span>Amnésico</span>
-                                
+
                                 <div class="trindade">
                                     <span style="color: greenyellow;">perícia</span><br>
                                     <span>uma à escolha<br>do mestre</span>
@@ -110,7 +110,7 @@
                         <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Artista">
                             <div class="origensBox">
                                 <span>Artista</span>
-                                
+
                                 <div class="trindade">
                                     <span style="color: greenyellow;">perícia</span><br>
                                     <span>artes</span>
@@ -121,7 +121,7 @@
                         <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Atleta">
                             <div class="origensBox">
                                 <span>Atleta</span>
-                                
+
                                 <div class="trindade">
                                     <span style="color: greenyellow;">perícia</span><br>
                                     <span>atletismo</span>
@@ -201,25 +201,16 @@
 <script>
 
     function validarSessao() {
-
-        var nickUsuario = sessionStorage.NICK_USUARIO;
-
-        if (nickUsuario == null) {
-            nomeUsuario_span.innerHTML = ``
+            nomeUsuario_span.innerHTML = sessionStorage.NICK_USUARIO;
+            pfp_usuario.src = sessionStorage.PFP
         }
-        else {
-            nomeUsuario_span.innerHTML = nickUsuario
-            var pfp = document.getElementById('pfp_usuario')
-
-pfp.src = sessionStorage.PFP
-        }
-    }
+    
 
     function escolherOrigem(idSelecionado) {
 
         sessionStorage.origem = idSelecionado;
         window.location = 'toques.html'
     }
-    
+
 
 </script>

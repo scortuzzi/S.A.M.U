@@ -7,7 +7,7 @@ idUsuario int primary key auto_increment,
 nomeUsuario varchar(85),
 emailUsuario varchar(255) unique,
 nick varchar(45),
-telefone varchar(11),
+pfp varchar(255),
 senha varchar(45)
 ) auto_increment = 100;
 
@@ -94,7 +94,7 @@ vigor int,
 presenca int,
 forca int,
 nomePersonagem varchar(45),
-descricaoPersonagem varchar(255),
+imagemPersonagem varchar(255),
 fkUsuario int,
 fkOrigem int,
 constraint FKUf foreign key (fkUsuario) references usuario(idUsuario),

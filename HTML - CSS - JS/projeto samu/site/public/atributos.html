@@ -29,7 +29,7 @@
             <span><a href="cadastro.html">cadastro</a></span>
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
-            
+
             <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
@@ -61,9 +61,11 @@
         <div class="corpo">
 
             <div class="tutorial trindade">
-                <p>Estes são seus atributos, todos eles começam em 1 e você possui 4 pontos para distribuir como quiser entre eles,
-                    você pode reduzir um ponto a 0 para receber um ponto adicional associado a outro atributo, porém nenhum deles
-                    pode ultrapassar 3 pontos inicialmente 
+                <p>Estes são seus atributos, todos eles começam em 1 e você possui 4 pontos para distribuir como quiser
+                    entre eles,
+                    você pode reduzir um ponto a 0 para receber um ponto adicional associado a outro atributo, porém
+                    nenhum deles
+                    pode ultrapassar 3 pontos inicialmente
                 </p>
 
                 <p>total de pontos restantes:</p>
@@ -72,11 +74,16 @@
 
             <div class="atributos trindade">
                 <img src="assets/img/atributos.png" class="imagem">
-                <input value="1" type="number" class="inputéRelativa" id="agilidade_input" min="0" max="3" onkeyup="arrumarAtributo()">
-                <input value="1" type="number" class="inputéRelativa" id="inteligencia_input" min="0" max="3" onkeyup="arrumarAtributo()">
-                <input value="1" type="number" class="inputéRelativa" id="vigor_input" min="0" max="3" onkeyup="arrumarAtributo()">
-                <input value="1" type="number" class="inputéRelativa" id="presenca_input" min="0" max="3" onkeyup="arrumarAtributo()">
-                <input value="1" type="number" class="inputéRelativa" id="forca_input" min="0" max="3" onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="agilidade_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="inteligencia_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="vigor_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="presenca_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
+                <input value="1" type="number" class="inputéRelativa" id="forca_input" min="0" max="3"
+                    onkeyup="arrumarAtributo()">
             </div>
         </div>
 
@@ -151,25 +158,11 @@
 <script>
 
     function validarSessao() {
-
-        var nickUsuario = sessionStorage.NICK_USUARIO;
-
-        if (nickUsuario == null) {
-            nomeUsuario_span.innerHTML = ``
-            pfp_usuario.src = 'https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png'
-        }
-        else {
-            nomeUsuario_span.innerHTML = nickUsuario
-            var linkFichas = document.getElementById('fichas')
-            var linkAtributos = document.getElementById('atributos')
-            var pfp = document.getElementById('pfp_usuario')
-
-            pfp.src = sessionStorage.PFP
-        }
-
+        nomeUsuario_span.innerHTML = sessionStorage.NICK_USUARIO;
+        pfp_usuario.src = sessionStorage.PFP
     }
 
-        function arrumarAtributo() {
+    function arrumarAtributo() {
 
         var atributos = [
             Number(agilidade_input.value),
@@ -187,36 +180,36 @@
             vigor_input
         ]
 
-        for (i = 0; i < atributos.length; i ++) {
+        for (i = 0; i < atributos.length; i++) {
 
             if (atributos[i] < 0) {
                 atributos[i] = 0
             }
             else if (atributos[i] > 3) {
                 atributos[i] = 3
-            } 
+            }
 
             inputs[i].value = atributos[i]
         }
         sessionStorage.agilidade = agilidade_input.value,
-        sessionStorage.inteligencia = inteligencia_input.value,
-        sessionStorage.vigor = vigor_input.value,
-        sessionStorage.presença = presenca_input.value,
-        sessionStorage.força = forca_input.value
+            sessionStorage.inteligencia = inteligencia_input.value,
+            sessionStorage.vigor = vigor_input.value,
+            sessionStorage.presença = presenca_input.value,
+            sessionStorage.força = forca_input.value
 
 
-        
+
         var pontosTotais = ((atributos[0] + atributos[1] + atributos[2] + atributos[3] + atributos[4]) - 9) * -1;
 
-        if (pontosTotais < 0) {pontosRestantes.style.color = 'red'}
-        else {pontosRestantes.style.color = 'white'}
-        pontosRestantes.innerHTML = pontosTotais 
-        
-        
-        
-        
+        if (pontosTotais < 0) { pontosRestantes.style.color = 'red' }
+        else { pontosRestantes.style.color = 'white' }
+        pontosRestantes.innerHTML = pontosTotais
+
+
+
+
     }
-    
-    
+
+
 
 </script>

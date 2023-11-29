@@ -61,8 +61,8 @@
 
                 <div class="toquesFinais">
 
-                    <div class="trindade" style="margin-bottom: 20px; font-size: 17px; margin-bottom: 50px;">
-                        <p>Para finalizar, insira o nome do personagem, uma classe e uma descrição para ele
+                    <div style="margin-bottom: 20px; font-size: 17px; margin-bottom: 50px;">
+                        <p>Para finalizar, insira o nome do personagem e escolha uma classe
                         </p>
                     </div>
 
@@ -74,20 +74,80 @@
                             </div>
 
                             <div style="display: flex; flex-direction: column;">
-                                <span>classe:</span>
-                                <select id="classePersonagem_input">
-                                    <option value="especialista">especialista</option>
-                                    <option value="combatente">combatente</option>
-                                    <option value="oculstista">oculstista</option>
-                                </select>
+                                <span>foto do personagem:</span>
+                                <input type="text" id="personagemImagem" placeholder="insira o link da imagem">
                             </div>
                             <button onclick="cadastroPersonagem(), cadastroPersonagemHP()">Finalizar</button>
                         </div>
 
-                        <div class="descricao">
-                            <span id="teste">Descrição:</span>
-                            <textarea id="personagemDescricao_input" cols="0" rows="0"
-                                placeholder="descrição do personagem..."></textarea>
+                        <div class="classeContainer">
+                            <span>escolha uma classe:</span> 
+
+                            <div class="classesBox">
+                                <div id="combatente" class="classePersonagem trindade" onclick="escolherClasse(this.id)">
+                                    <span style="color: greenyellow; margin-top: 10px;">Combatente</span>
+
+                                    <span style="text-align: center;">um agente focado em combate</span>
+
+                                    <div class="status">
+
+                                        <div class="caracteristicas trindade">
+                                            <span class="cor">HP:</span>
+                                            <span class="cor">PE:</span>
+                                            <span class="cor">SAN:</span>
+                                        </div>
+
+                                        <div class="numeros trindade">
+                                            <span>20 + vigor</span>
+                                            <span>2 + presença</span>
+                                            <span>12</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="especialista" class="classePersonagem trindade" onclick="escolherClasse(this.id)">
+                                    <span style="color: greenyellow; margin-top: 10px;">Especialista</span>
+
+                                    <span style="text-align: center;">um agente focado em investigação</span>
+
+                                    <div class="status">
+
+                                        <div class="caracteristicas trindade">
+                                            <span class="cor">HP:</span>
+                                            <span class="cor">PE:</span>
+                                            <span class="cor">SAN:</span>
+                                        </div>
+
+                                        <div class="numeros trindade">
+                                            <span>16 + vigor</span>
+                                            <span>3 + presença</span>
+                                            <span>16</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="ocultista" class="classePersonagem trindade" onclick="escolherClasse(this.id)">
+                                    <span style="color: greenyellow; margin-top: 10px;">ocultista</span>
+
+                                    <span style="text-align: center;">um agente misterioso e ritualístico</span>
+
+                                    <div class="status">
+
+                                        <div class="caracteristicas trindade">
+                                            <span class="cor">HP:</span>
+                                            <span class="cor">PE:</span>
+                                            <span class="cor">SAN:</span>
+                                        </div>
+
+                                        <div class="numeros trindade">
+                                            <span>12 + vigor</span>
+                                            <span>4 + presença</span>
+                                            <span>20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -169,43 +229,40 @@
 
     var idVar = sessionStorage.ID_USUARIO
 
+    sessionStorage.classe = ''
+
     function validarSessao() {
-
-        console.log('legal')
-        var nickUsuario = sessionStorage.NICK_USUARIO;
-
-        if (nickUsuario == null) {
-            nomeUsuario_span.innerHTML = ``
+            nomeUsuario_span.innerHTML = sessionStorage.NICK_USUARIO;
+            pfp_usuario.src = sessionStorage.PFP
         }
-        else {
-            nomeUsuario_span.innerHTML = nickUsuario
-            var pfp = document.getElementById('pfp_usuario')
-
-            pfp.src = sessionStorage.PFP
-        }
-
-    }
 
     // está função coloca todos os dados da criação de ficha dentro do banco de dados, desde os atributos, vida, nome, classe e origem
     function cadastroPersonagem() {
+
+        if (sessionStorage.classe == '') {
+            alert('escolha uma classe')
+        }
+
+        else {
 
         var vida = 20 + Number(sessionStorage.vigor)
         var san = 12;
         var pe = 2 + sessionStorage.presença
 
-        if (classePersonagem_input == 'especialista') {
+        if (sessionStorage.classe == 'especialista') {
             vida = 16 + Number(sessionStorage.vigor)
             san = 16
             pe = 3 + Number(sessionStorage.presença)
         }
-        else if (classePersonagem_input == 'ocultista') {
+        else if (sessionStorage.classe == 'ocultista') {
             vida = 12 + Number(sessionStorage.vigor)
             san = 20;
             pe = 4 + Number(sessionStorage.presença)
         }
 
         var personagemVar = personagemNome_input.value;
-        var classeVar = classePersonagem_input.value;
+        var classeVar = sessionStorage.classe;
+        var imagem = personagemImagem.value;
 
         var agilidadeVar = sessionStorage.agilidade;
         var inteligenciaVar = sessionStorage.inteligencia;
@@ -225,6 +282,7 @@
                 personagemServer: personagemVar,
                 idServer: idVar,
                 classeServer: classeVar,
+                imagemServer: imagem,
 
                 agilidadeServer: agilidadeVar,
                 inteligenciaServer: inteligenciaVar,
@@ -243,6 +301,8 @@
 
         insercao()
 
+    
+
 
         // ----------------------------------------------------------
 
@@ -258,43 +318,22 @@
             })
 
 
-        } pegarOrigem()
+        } updateOrigem()
         // arruma aqui, o primeiro insert de todos na fichaPericias tem alguns indo como indefinido ????
 
 
 
         //função para buscar a id da origem escolhida:
-        function pegarOrigem() {
 
 
+
+        
+        
+        
+        
+        
+        function updateOrigem() {
             var origem = sessionStorage.origem;
-
-            fetch(`/insercao/listarOrigem/${origem}`, {
-                cache: 'no-store'
-            })
-                .then(function (response) {
-                    if (response.ok) {
-                        response.json().then(function (resposta) {
-
-                            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                            resposta.reverse();
-
-
-                            updateOrigem(resposta);
-
-                        });
-                    } else {
-                        console.error('Nenhum dado encontrado ou erro na API');
-                        console.log(resposta)
-                    }
-                })
-                .catch(function (error) {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
-
-        }
-
-        function updateOrigem(resposta) {
 
             fetch(`/insercao/cadastrarOrigem/${resposta[0].fkPericia}/${idFicha}`, {
                 method: "POST",
@@ -303,13 +342,29 @@
                 }
             })
         }
+        setTimeout(() => {
 
+            window.location = 'fichas.html'
+        }, 2000);
 
-        // setTimeout(() => {
+    }
+}
 
-        //     window.location = 'fichas.html'
-        // }, 2000);
+    function escolherClasse(id) {
+        
+        sessionStorage.classe = id
 
+        var classeSelecionada = document.getElementById(id)
+
+        var combatente = document.getElementById('combatente')
+        var especialista = document.getElementById('especialista')
+        var oculsita = document.getElementById('ocultista')
+
+        combatente.style.border = ''
+        especialista.style.border = ''
+        oculsita.style.border = ''
+
+        classeSelecionada.style.border = '2px greenyellow solid'
     }
 
 

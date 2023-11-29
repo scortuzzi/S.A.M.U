@@ -41,8 +41,7 @@
             <div class="credencias space">
 
                 <div>
-                    <img style="width: 70px; border: solid 2px white; margin-top: 10px;"
-                        src="https://static.wikia.nocookie.net/ordemparanormal/images/1/11/Dante_em_Sinais_do_Outro_Lado.png/revision/latest?cb=20221212004702&path-prefix=pt-br">
+                    <img style="width: 70px; border: solid 2px white; margin-top: 10px;" id="personagemPfp" src="">
                 </div>
 
                 <div class="fundo">
@@ -81,15 +80,6 @@
 
                     <div style="display: flex;">
                         <span style="margin-right: 10px;">classe:</span>
-
-                    </div>
-
-                    <div style="display: flex;">
-                        <span>NEX:</span>
-                    </div>
-
-                    <div style="display: flex;">
-                        <span>deslocamento:</span>
                     </div>
                 </div>
 
@@ -102,15 +92,6 @@
                         <span class="underline fundo" id="classeSpan"></span>
                     </div>
 
-
-
-                    <div style="display: flex;">
-                        <span class="underline fundo" style="width: 100%;" id="nexSpan">5%</span>
-                    </div>
-
-                    <div style="display: flex;">
-                        <span class="underline fundo" style="width: 100%;" id="deslocamentoSpan">9m</span>
-                    </div>
                 </div>
             </div>
 
@@ -272,19 +253,8 @@
     var idFichaVar = sessionStorage.FICHA
 
     function validarSessao() {
-
-        var nickUsuario = sessionStorage.NICK_USUARIO;
-
-        if (nickUsuario == null) {
-            nomeUsuario_span.innerHTML = ``
-        }
-        else {
-            nomeUsuario_span.innerHTML = nickUsuario
-            var pfp = document.getElementById('pfp_usuario')
-
-            pfp.src = sessionStorage.PFP
-        }
-
+        nomeUsuario_span.innerHTML = sessionStorage.NICK_USUARIO;
+        pfp_usuario.src = sessionStorage.PFP
     }
 
     // traz os dados da ficha, desde os atributos, nome do personagem, classe e etc...
@@ -299,6 +269,8 @@
 
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
+
+                    personagemPfp.src = resposta[0].imagemPersonagem
 
                     exibirInformacoes(resposta);
 
@@ -362,6 +334,7 @@
             response.json().then(function (resposta) {
 
                 console.log('bonus encontrados:' + resposta)
+
                 exibirvalores(resposta);
 
             });
@@ -514,14 +487,16 @@
 
     //função de rolagem de dados
 
-    var agilidade = sessionStorage.agilidade;
-    var intelecto = sessionStorage.intelecto;
-    var vigor = sessionStorage.vigor;
-    var presenca = sessionStorage.presenca;
-    var forca = sessionStorage.forca;
 
 
     function rolarDados(id) {
+
+
+        var agilidade = sessionStorage.agilidade;
+        var intelecto = sessionStorage.intelecto;
+        var vigor = sessionStorage.vigor;
+        var presenca = sessionStorage.presenca;
+        var forca = sessionStorage.forca;
 
         var periciaValor = document.getElementById(id - 100);
 

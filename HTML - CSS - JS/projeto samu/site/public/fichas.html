@@ -110,20 +110,10 @@
 
 <script>
 
-    function validarSessao() {
-
-        var nickUsuario = sessionStorage.NICK_USUARIO;
-
-        if (nickUsuario == null) {
-            nomeUsuario_span.innerHTML = ``
+function validarSessao() {
+            nomeUsuario_span.innerHTML = sessionStorage.NICK_USUARIO;
+            pfp_usuario.src = sessionStorage.PFP
         }
-        else {
-            nomeUsuario_span.innerHTML = nickUsuario
-            var pfp = document.getElementById('pfp_usuario')
-
-            pfp.src = sessionStorage.PFP
-        }
-    }
 
     function trazerFicha() {
 
@@ -154,7 +144,15 @@
 
         function plotarInformacoes(resposta) {
 
+            var foto = 'assets/img/pfp.png'
+
             for (i = 0; i < resposta.length; i++) {
+
+                console.log(resposta[i].imagemPersonagem)
+
+                if (resposta[i].imagemPersonagem != ''){
+                    foto = resposta[i].imagemPersonagem
+                }
 
                 cards_div.innerHTML += `
             
@@ -163,7 +161,7 @@
                 <div class="personagemCard" id="${resposta[i].idFicha}" onclick="escolherFicha(this.id)"> 
     
                     <div style="display: flex; justify-content: space-around;">
-                        <img src="assets/img/pfp.png" alt="" class="personagemImagem">
+                        <img src="${foto}" alt="" class="personagemImagem">
                         <h3 id="nomePersonagem_span">${resposta[i].nomePersonagem}</h3>
                     </div>
 

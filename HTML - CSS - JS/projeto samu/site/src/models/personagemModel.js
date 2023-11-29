@@ -15,7 +15,9 @@ function listar(id) {
     ficha.nomePersonagem,
     ficha.fkUsuario,
     ficha.fkOrigem,
-    ficha.classe
+    ficha.classe,
+
+    ficha.imagemPersonagem
     
 
     from ficha
@@ -29,11 +31,11 @@ function listar(id) {
 
 
 
-function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem, vida, san, pe) {
+function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem, vida, san, pe, imagem) {
     var instrucao = `
-    insert into ficha (nomePersonagem, fkUsuario, agilidade, inteligencia, vigor, presenca, forca, classe, fkOrigem, vida, sanidade, pe) values
+    insert into ficha (nomePersonagem, fkUsuario, agilidade, inteligencia, vigor, presenca, forca, classe, fkOrigem, vida, sanidade, pe, imagemPersonagem) values
     
-    ('${nomePersonagem}', '${id}', '${agi}', '${int}', '${vig}', '${pre}', '${forc}', '${classe}',(select origem.idOrigem from origem where nomeOrigem = '${origem}'),  ${vida}, ${san}, ${pe});
+    ('${nomePersonagem}', '${id}', '${agi}', '${int}', '${vig}', '${pre}', '${forc}', '${classe}',(select origem.idOrigem from origem where nomeOrigem = '${origem}'),  ${vida}, ${san}, ${pe}, '${imagem}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
