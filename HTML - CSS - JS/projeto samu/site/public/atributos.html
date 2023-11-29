@@ -30,7 +30,7 @@
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
             
-            <div class="user"></div>
+            <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
         </div>
@@ -156,9 +156,15 @@
 
         if (nickUsuario == null) {
             nomeUsuario_span.innerHTML = ``
+            pfp_usuario.src = 'https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png'
         }
         else {
             nomeUsuario_span.innerHTML = nickUsuario
+            var linkFichas = document.getElementById('fichas')
+            var linkAtributos = document.getElementById('atributos')
+            var pfp = document.getElementById('pfp_usuario')
+
+            pfp.src = sessionStorage.PFP
         }
 
     }

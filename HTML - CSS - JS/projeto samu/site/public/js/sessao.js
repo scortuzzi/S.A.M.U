@@ -18,3 +18,6 @@ function limparSessao() {
     window.location = "../login.html";
 }
 
+function aguardar() {
+    console.log('próximo')
+}

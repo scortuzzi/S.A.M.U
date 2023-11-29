@@ -85,6 +85,9 @@ algum evento relacionado ao Outro Lado em uma de suas competições.', 103);
 
 create table ficha (
 idFicha int primary key auto_increment,
+vida int,
+sanidade int,
+pe int,
 agilidade int,
 inteligencia int,
 vigor int,
@@ -114,40 +117,42 @@ nomeUsuario varchar(45),
 dataHora datetime default current_timestamp
 ) auto_increment = 10000;
 
-insert into analytics (nomeUsuario) values
 
 
+-- testes
+
+select * from analytics;
+
+select * from count(analytics) where datahora between '2023-11-25 23:33:30' and '2023-11-25 23:33:59';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-select avg(agilidade), avg(inteligencia), avg(presenca), avg(vigor), avg(forca) from ficha;
 select * from ficha;
 
-select 
-	round(avg(agilidade), 0), 
-    round(avg(inteligencia), 0), 
-    round(avg(vigor), 0), 
-    round(avg(presenca), 0),
-    round(avg(forca), 0)
-    from ficha;
-    
-select 
-	sum(agilidade),
-    sum(inteligencia),
-    sum(vigor),
-    sum(presenca),
-    sum(forca)
-    from ficha;
+select nomeOrigem from origem where idOrigem = 1;
+
+select idOrigem from origem where nomeOrigem = 'Atleta';
+
+select * from origem;
+select * from fichaPericia;
+
+select * from ficha;
+
+ select fkPericia from origem where nomeOrigem = 'Agente da saúde';
+ 
+ select * from analytics;
+ 
+ select count(nomeUsuario) from analytics where nomeUsuario != 'undefined';
+ 
+ 
+ select fkPericia from origem where nomeOrigem = 'Agente da saúde';
+ select
+
+update fichaPericia set valor = 5 where fkFicha = 1001 and fkPericia = 1004;
+
+
+
+
+select * from origem;
+
+
     

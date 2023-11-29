@@ -26,7 +26,7 @@
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
 
-            <div class="user"></div>
+            <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
         </div>
@@ -37,7 +37,7 @@
 
     <div class="flexivel">
 
-        <div class="fichas"  id="cards_div">
+        <div class="fichas" id="cards_div">
 
 
 
@@ -119,6 +119,9 @@
         }
         else {
             nomeUsuario_span.innerHTML = nickUsuario
+            var pfp = document.getElementById('pfp_usuario')
+
+            pfp.src = sessionStorage.PFP
         }
     }
 
@@ -130,20 +133,20 @@
         fetch(`/personagem/listar/${idVar}`, {
             cache: 'no-store'
         })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-                    
-                    plotarInformacoes(resposta);
-                    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        plotarInformacoes(resposta);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
@@ -166,7 +169,7 @@
 
 
                     <div class="displaySpace" style="padding: 0px 20px;">
-                        <span style="color: red; font-weight: bold;">remover</span>
+                        <span style="color: red; font-weight: bold;" onclick="removerFicha(this.id)">remover</span>
                         <a href="fichaPersonagem.html"><button>Ficha</button></a>
                     </div>
 
@@ -178,11 +181,28 @@
             }
         }
     }
+    function escolherFicha(id) {
 
-        function escolherFicha(id) {
+        console.log(id)
+        sessionStorage.FICHA = id
+    }
 
-            console.log(id)
-            sessionStorage.FICHA = id
-        }
+
+
+    function removerFicha(id) {
+
+        // primero, a remoção dos valores que contém a fk da ficha
+        fetch(`/insercao/cadastrarOrigem/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+
+
+
+
+
+    }
 
 </script>

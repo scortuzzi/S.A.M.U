@@ -2,7 +2,7 @@ var database = require("../database/config")
 
 function listar(idFicha) {
     var instrucao = `
-        SELECT * FROM fichaPericia where fkFicha = ${idFicha-1};
+        SELECT * FROM fichaPericia where fkFicha = ${idFicha};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -11,7 +11,7 @@ function listar(idFicha) {
 function cadastrar(idFicha, idPericia, valor) {
     var instrucao = `
 
-        UPDATE fichaPericia set valor = ${valor} where fkFicha = ${idFicha-1} and fkPericia = ${idPericia};
+        UPDATE fichaPericia set valor = ${valor} where fkFicha = ${idFicha} and fkPericia = ${idPericia};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

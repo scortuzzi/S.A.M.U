@@ -22,7 +22,7 @@
         </div>
 
         <div class="botoes displaySpace">
-            <span><a href="fichas.html">fichas</a></span>
+            <span><a id="fichas" href="login.html">fichas</a></span>
             <span><a href="index.html">home</a></span>
             <div class="barrinha"></div>
             <span class="aqui">login</span>
@@ -30,7 +30,7 @@
 
             <img src="./assets/img/logo.png" alt="ilustração de iceberg" id="logo">
 
-            <div class="user"></div>
+            <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
         </div>
@@ -137,9 +137,16 @@
 
         if (nickUsuario == null) {
             nomeUsuario_span.innerHTML = ``
+            pfp_usuario.src = 'https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png'
         }
         else {
             nomeUsuario_span.innerHTML = nickUsuario
+            var linkFichas = document.getElementById('fichas')
+            var pfp = document.getElementById('pfp_usuario')
+
+            pfp.src = sessionStorage.PFP
+
+            linkFichas.href = 'fichas.html'
         }
 
     }
@@ -189,8 +196,8 @@
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.NICK_USUARIO = json.nick;
                     sessionStorage.SENHA_USUARIO = json.senha;
+                    sessionStorage.PFP = json.pfp
 
-                    console.log('legal')
 
 
                     setTimeout(function () {

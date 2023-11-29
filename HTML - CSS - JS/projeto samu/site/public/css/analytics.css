@@ -1,0 +1,15 @@
+
+
+.lugarGraficos {
+
+width: 80%;
+padding:40px 90px;
+display: flex;
+justify-content: space-around;
+
+}
+
+.graficoUsuarios {
+    
+    width: 500px;
+}

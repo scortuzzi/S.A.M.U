@@ -23,7 +23,7 @@
         </div>
 
         <div class="botoes displaySpace">
-            <span><a href="fichas.html">fichas</a></span>
+            <span><a id="fichas" href="login.html">fichas</a></span>
             <span class="aqui">home</span>
             <div class="barrinha"></div>
             <span><a href="login.html">login</a></span>
@@ -32,7 +32,7 @@
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
 
-            <div class="user"></div>
+            <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
         </div>
 
@@ -61,7 +61,7 @@
                         clique agora e comece já
                     </p>
 
-                    <a href="atributos.html"><button class="criarFicha">Criar Ficha</button></a>
+                    <a href="login.html" id="atributos"><button class="criarFicha">Criar Ficha</button></a>
 
                 </div>
 
@@ -106,7 +106,7 @@
                         <h3>D20 Sheets</h3>
 
                         <span>
-                            conheça mais sobre o <br> <span> projeto D20 Sheets </span>
+                            foque em sua interpretação<br> <span> e na narrativa </span>
                         </span>
 
                     </div>
@@ -121,10 +121,10 @@
                     </div>
 
                     <div class="texto trindade">
-                        <h3>Estou aqui para jogar</h3>
+                        <h3>Praticidade</h3>
 
                         <span>
-                            visite nossa blibioteca de<br> <span>jogos indepentes</span>
+                            divirta-se de forma<br> <span> mais ágil</span>
                         </span>
 
                     </div>
@@ -149,7 +149,7 @@
                     <div class="sobreEImagem">
 
                         <div class="SobreD20">
-                            <p>Começando como um projeto de faculdade, a Abissal é um projeto que tem como objetivo
+                            <p>Começando como um projeto de faculdade, S.A.M.U é um projeto que tem como objetivo
                                 criar
                                 um espaço onde nós possamos trazer mais pessoas para conhecer o mundo dos RPG's de mesa
                             </p>
@@ -305,14 +305,23 @@
     
     var nickUsuario = sessionStorage.NICK_USUARIO;
 
-    function validarSessao() {
 
+    function validarSessao() {
 
         if (nickUsuario == null) {
             nomeUsuario_span.innerHTML = ``
+            pfp_usuario.src = 'https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png'
         }
         else {
             nomeUsuario_span.innerHTML = nickUsuario
+            var linkFichas = document.getElementById('fichas')
+            var linkAtributos = document.getElementById('atributos')
+            var pfp = document.getElementById('pfp_usuario')
+
+            pfp.src = sessionStorage.PFP
+
+            linkAtributos.href = 'atributos.html'
+            linkFichas.href = 'fichas.html'
         }
 
     }

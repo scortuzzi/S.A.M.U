@@ -27,7 +27,7 @@
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
 
-            <div class="user"></div>
+            <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
         </div>
@@ -58,6 +58,8 @@
 
             <div class="atributosFicha trindade">
                 <img src="assets/img/atributos.png" class="atributosImagem">
+
+                <!--as inputs de atributos, listadas em um circulo-->
 
                 <input value="1" type="number" class="inputéRelativa" id="agilidade_input" min="0" max="3"
                     onkeyup="arrumarAtributo()">
@@ -114,6 +116,8 @@
 
             <div id="tracao"></div>
 
+            <!--barras de hp, sanidade e PE-->
+
             <div class="HPSAN trindade">
 
                 <div class="simulacao" style="margin-top: 30px;">
@@ -150,6 +154,8 @@
             <div class="colunaNumeros">
 
                 <h3>dados</h3>
+
+                <!--todos os atributos usados pelas perícias-->
 
                 <span id="atributo1000" class="atributobase">(AGI)</span>
                 <span id="atributo1001" class="atributobase">(PRE)</span>
@@ -274,6 +280,9 @@
         }
         else {
             nomeUsuario_span.innerHTML = nickUsuario
+            var pfp = document.getElementById('pfp_usuario')
+
+            pfp.src = sessionStorage.PFP
         }
 
     }
@@ -352,13 +361,13 @@
         if (response.ok) {
             response.json().then(function (resposta) {
 
+                console.log('bonus encontrados:' + resposta)
                 exibirvalores(resposta);
-                console.log(resposta)
 
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
-            exibirvalores(resposta);
+            // exibirvalores(resposta);
         }
     })
 
@@ -370,13 +379,16 @@
 
         while (i <= 27) {
 
+            // são 27 perícias, cada uma com um respectivo valor de bônus, por isso o while que se repete 27 vezes,
+            // nós pegamos o primeiro e inserimos eles em ordem cronológica um abaixo do outro
+
             listaValores_div.innerHTML += `
                     <span>  <input id="${i}" type="number" class="bônus" onkeyup="mudarBonus(this.id)" value="${resposta[i].valor}">  </span>
                     `
 
             var valorPericia = document.getElementById(i);
 
-            if (valorPericia.value > 5) {
+            if (valorPericia.value >= 5) {
                 valorPericia.style.color = 'rgb(92, 203, 92)'
             }
 
@@ -386,7 +398,7 @@
 
 
     }
-    
+
 
 
     //uma função para receber o nome de todas as perícias
@@ -396,7 +408,9 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
 
+                    console.log('pericias encontradas:' + resposta[0].nomePericia)
                     exibirPericias(resposta);
+
 
                 });
             } else {
@@ -417,7 +431,7 @@
 
                 var valor = document.getElementById(i)
 
-                if (valor.value > 5) {
+                if (valor.value >= 5) {
 
                     listaPericias_div.innerHTML += `
             <div> <img src="assets/img/logo.png" id="${resposta[i].idPericia}" onclick="rolarDados(this.id)"> <span style="color: rgb(92, 203, 92);" class="periciaNome" id="${resposta[i].nomePericia}">${resposta[i].nomePericia}</span> </div>

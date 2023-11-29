@@ -28,6 +28,7 @@ function cadastrar(req, res) {
     })
 }
 
+
 function cadastrarHP(req, res) {
 
     var idFicha = req.params.idFicha;

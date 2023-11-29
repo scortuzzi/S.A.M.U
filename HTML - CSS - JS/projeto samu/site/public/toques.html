@@ -29,7 +29,7 @@
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
 
-            <div class="user"></div>
+            <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
         </div>
@@ -165,6 +165,8 @@
 
 <script>
 
+    var idFicha
+
     var idVar = sessionStorage.ID_USUARIO
 
     function validarSessao() {
@@ -177,6 +179,9 @@
         }
         else {
             nomeUsuario_span.innerHTML = nickUsuario
+            var pfp = document.getElementById('pfp_usuario')
+
+            pfp.src = sessionStorage.PFP
         }
 
     }
@@ -236,55 +241,98 @@
             }),
         })
 
-
-        // esta função pega o id da ficha que nós acabamos de criar
-        fetch(`/insercao/listar/`, {
-            cache: 'no-store'
-        })
-            .then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (resposta) {
-
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                        resposta.reverse();
+        insercao()
 
 
-                        insercao(resposta);
+        // ----------------------------------------------------------
 
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                    console.log(resposta)
+
+        // esta função faz 28 inserts dentro da tabela fichaPericia, com cada uma pericia sendo setada como zero
+        function insercao() {
+
+            fetch(`/insercao/cadastrar/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
                 }
             })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-            // ----------------------------------------------------------
 
 
-            // esta função faz 28 inserts dentro da tabela fichaPericia, com cada uma pericia sendo setada como zero
-        function insercao(resposta) {
+        } pegarOrigem()
+        // arruma aqui, o primeiro insert de todos na fichaPericias tem alguns indo como indefinido ????
 
 
-            for (i = 100; i <= 127; i++) {
 
-                fetch(`/insercao/cadastrar/${resposta[0].idFicha}/${i}`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
+        //função para buscar a id da origem escolhida:
+        function pegarOrigem() {
+
+
+            var origem = sessionStorage.origem;
+
+            fetch(`/insercao/listarOrigem/${origem}`, {
+                cache: 'no-store'
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        response.json().then(function (resposta) {
+
+                            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                            resposta.reverse();
+
+
+                            updateOrigem(resposta);
+
+                        });
+                    } else {
+                        console.error('Nenhum dado encontrado ou erro na API');
+                        console.log(resposta)
                     }
                 })
-            }
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+
         }
 
-        setTimeout(() => {
+        function updateOrigem(resposta) {
 
-            window.location = 'fichas.html'
-        }, 2000);
+            fetch(`/insercao/cadastrarOrigem/${resposta[0].fkPericia}/${idFicha}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+        }
 
+
+        // setTimeout(() => {
+
+        //     window.location = 'fichas.html'
+        // }, 2000);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

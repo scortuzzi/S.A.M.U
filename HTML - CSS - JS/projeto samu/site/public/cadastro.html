@@ -26,7 +26,7 @@
       </div>
 
       <div class="botoes displaySpace">
-        <span><a href="fichas.html">fichas</a></span>
+        <span><a id="fichas" href="login.html">fichas</a></span>
         <span><a href="index.html">home</a></span>
         <div class="barrinha"></div>
         <span><a href="login.html">login</a></span>
@@ -34,7 +34,7 @@
 
         <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
 
-        <div class="user"></div>
+        <img class="user" id="pfp_usuario" src="" alt="">
         <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
       </div>
@@ -69,8 +69,8 @@
             </div>
 
             <div class="input">
-              <span>Telefone:</span>
-              <input id="telefone_input" placeholder="+55 (11) 00000-0000">
+              <span>Imagem de perfil:</span>
+              <input id="imagem_input" placeholder="copie o link de sua imagem aqui">
             </div>
 
 
@@ -185,15 +185,22 @@
 
     if (nickUsuario == null) {
       nomeUsuario_span.innerHTML = ``
+      pfp_usuario.src = 'https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png'
     }
     else {
       nomeUsuario_span.innerHTML = nickUsuario
+      var linkFichas = document.getElementById('fichas')
+      var pfp = document.getElementById('pfp_usuario')
+
+      pfp.src = sessionStorage.PFP
+
+      linkFichas.href = 'fichas.html'
     }
 
   }
 
   function senhaDinamica() {
-    
+
   }
 
   function cadastro() {
@@ -203,7 +210,7 @@
     var nomeUsuario_var = nome_input.value;
     var emailUsuario_var = email_input.value;
     var nickUsuario_var = nick_input.value;
-    var telefone_var = telefone_input.value;
+    var imagem_var = imagem_input.value;
     var senha_var = senha_input.value;
     var confirmacaoSenha_var = senhaCon_input.value;
     if (
@@ -261,6 +268,7 @@
         emailServer: emailUsuario_var,
         nickServer: nickUsuario_var,
         senhaServer: senha_var,
+        imagemServer: imagem_var
       }),
     })
       .then(function (resposta) {

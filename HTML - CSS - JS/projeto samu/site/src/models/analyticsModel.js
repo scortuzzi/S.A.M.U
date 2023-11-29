@@ -1,31 +1,14 @@
 var database = require("../database/config")
 
-function listar() {
-    var instrucao = `
-    select * from analytics;
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
+// -----------------------------------------------------------------------------------------------------
 
-function listarMedia() {
-    var instrucao = `
-    select 
-	    round(avg(agilidade), 0) agilidade,
-        round(avg(inteligencia), 0) inteligencia,
-        round(avg(vigor), 0) vigor,
-        round(avg(presenca), 0) presenca,
-        round(avg(forca), 0) forca
-    from ficha;
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
+// função que acessa a soma de todos os atributos cadastrados nas fichas de todos os usuários
+// usada para saber quais os atributos mais escolhidos pelos usuários
 
 function listarSoma() {
     var instrucao = `
     select 
-	    sum(agilidade) agilidadaSoma,
+	    sum(agilidade) agilidadeSoma,
         sum(inteligencia) intelectoSoma,
         sum(presenca) presencaSoma,
         sum(vigor) vigorSoma,
@@ -35,16 +18,35 @@ function listarSoma() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+// -----------------------------------------------------------------------------------------------------
 
-function listarUsuarios() {
+// função criada para listar quantos acessos houveram no site nos últimos 7 dias,
+// ela cria o gráfico de linha vista na página de analytics
+
+function acessosDias() {
     var instrucao = `
-    select count(distinct nomeUsuario) quantos from analytics;
+
+    select  DATE_FORMAT(datahora, '%d-%m-%Y')as 'data', count(*) as quantos from analytics group by datahora order by datahora desc limit 7;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+// -----------------------------------------------------------------------------------------------------
 
-// para mostrar quantos acessos deslogados existem
+// esta função lista a quantidade de acessos por pessoas que estavam cadastradas no site
+
+function listarUsuarios() {
+    var instrucao = `
+    select count(nomeUsuario) as quantos from analytics where nomeUsuario != 'undefined';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+// -----------------------------------------------------------------------------------------------------
+
+// em contra partida, esta função lista a quantidade de acessos feitas por usuários
+// não logados dentro do site, sem nenhuma conta
+
 function listarUsuariosUndefined() {
     var instrucao = `
     select count(nomeUsuario) as deslogados from analytics where nomeUsuario = 'undefined';
@@ -52,8 +54,11 @@ function listarUsuariosUndefined() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+// -----------------------------------------------------------------------------------------------------
 
-// para mostrar quantas fichas tem registradas
+// esta função lista a quantidade de registro dentro da tabela fichas
+// ela mostra quantas fichas já foram criadas universalmente dentro do site por todos os usuários
+
 function listarFichas() {
     var instrucao = `
     select count(*) as quantasFichas from ficha;
@@ -61,26 +66,26 @@ function listarFichas() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+// -----------------------------------------------------------------------------------------------------
+
+// função que cadastra um novo acesso toda vez que alguém carrega a página, ela leva com ela seu nome
+// registrando como undefined caso o usuário acessando o site não esteja logado
 
 function cadastrar(nomeUsuario) {
     var instrucao = `
-      insert into analytics (nomeUsuario) values
-      ('${nomeUsuario}');
+      insert into analytics (nomeUsuario, dataHora) values
+      ('${nomeUsuario}', curdate());
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+// -----------------------------------------------------------------------------------------------------
 
 module.exports = {
     cadastrar,
-    listarMedia,
     listarSoma,
+    acessosDias,
     listarUsuarios,
     listarUsuariosUndefined,
-    listarFichas,
-    listar
+    listarFichas
 };
-
-// peter, a gente precisa saber quantos usuarios entraram no site por dia, pra isso a gente
-// precisa fazer um select onde o where = dia atual, pra pegar o dia atual a gente precisa
-// trazer como parametro, o dia do computador, que é pego com uma função especifica do javascript

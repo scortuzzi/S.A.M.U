@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.A.M.U - Fichas</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/analytics.css">
     <link rel="icon" href="assets/img/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="validarSessao(), trazerFicha()">
+<body onload="pegarDados()">
 
     <header class="displaySpace identidade">
 
@@ -18,7 +20,7 @@
         </div>
 
         <div class="botoes displaySpace">
-            <span class="aqui">fichas</span>
+            <span><a href="fichas.html">fichas</a></span>
             <span><a href="index.html">home</a></span>
             <div class="barrinha"></div>
             <span><a href="login.html">login</a></span>
@@ -34,51 +36,67 @@
     </header>
 
     <!-- fim da header -->
+    <!----------------------------------------------------------------------------------------------->
 
-    <div class="flexivel trindade">
+    <div class="trindade" style="max-width: 100%;">
 
-        <span>média de atributos</span>
+        <div class="lugarGraficos">
 
-        <div class="analytics">
-            <span id="agilidade"></span>
-            <span id="intelecto"></span>
-            <span id="vigor"></span>
-            <span id="presenca"></span>
-            <span id="forca"></span>
-        </div> <br>
+            <div class="graficoUsuarios trindade">
 
-        <span>soma de todos os atributos</span>
+                <h1>Usuários</h1>
 
-        <div class="analytics">
-            <span id="Somaagilidade"></span>
-            <span id="Somaintelecto"></span>
-            <span id="Somavigor"></span>
-            <span id="Somapresenca"></span>
-            <span id="Somaforca"></span>
-        </div><br>
+                <div style="position: relative; max-height:100vh; width:40vw">
+                    <canvas id="grafico_usuarios"></canvas>
+                </div>
 
-        <span>esse tanto de usuarios ja entraram no site:</span>
+            </div>
 
-        <div class="analytics">
-            <span id="esseTanto"></span>
-        </div> <br>
+            <div class="graficoUsuarios trindade">
 
-        <span>esse tanto de usuarios entraram no site deslogados:</span>
+                <h1>Atributos mais escolhidos</h1>
 
-        <div class="analytics">
-            <span id="esseTantoDeslogados"></span>
-        </div> <br>
-        
-        <span>existem esse tanto de fichas registradas:</span>
+                <div style="position: relative; max-height:100vh; width:40vw">
+                    <canvas id="grafico_atributos"></canvas>
+                </div>
 
-        <div class="analytics">
-            <span id="quantasFichas"></span>
-        </div> 
+            </div>
 
+
+        </div>
+
+        <div class="lugarGraficos">
+
+            <div class="graficoUsuarios trindade">
+
+                <h1>Fichas registradas:</h1>
+
+                <div>
+                    <span style="font-size: 50px;" id="qtdFichas"></span>
+                </div>
+
+                <div class="graficoUsuarios trindade" style="margin-top: 70px; width: 800px;">
+
+                    <h1>Quantidade de acessos na última semana</h1>
+
+                    <!-- <div style="position: relative; max-height:100vh; width:40vw">
+                        <canvas id="grafico_atributos"></canvas>
+                    </div> -->
+
+                    <div style="position: relative; max-height:100vh; width:40vw">
+                        <canvas id="grafico_semana"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
-
+    <!----------------------------------------------------------------------------------------------->
+    <!--footer-->
     <footer class="identidade trindade" style="margin-top: 300px;">
 
         <div>
@@ -133,7 +151,7 @@
         </div>
 
     </footer>
-
+    <!----------------------------------------------------------------------------------------------->
 
 
 </body>
@@ -141,159 +159,261 @@
 
 <script>
 
-// mostra a média de atributos
-fetch(`/analytics/listarMedia/`, {
-            cache: 'no-store'
-        })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-                    
-                    mostrarMedia(resposta);
-                    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+    var somaAtributos = [] // vetor com a soma de cada atributo, tem length = 4
+    var quantosUsuarios = 0 // uma váriavel que será posteriormente atualizada para ser consultada com a quantiadade de acessos por usuários cadastrados
+    var quantosDeslogados = 0 // uma váriavel que funciona como a de cima, com a exceção que está conta com a quantidade de acessos por usuários não logados
 
-            function mostrarMedia(resposta) {
-
-                agilidade.innerHTML = resposta[0].agilidade
-                intelecto.innerHTML = resposta[0].inteligencia
-                vigor.innerHTML = resposta[0].vigor
-                presenca.innerHTML = resposta[0].presenca
-                forca.innerHTML = resposta[0].forca
-
-
-            }
-
-// mostra a soma de todos os atributos ja registrados
-            fetch(`/analytics/listarSoma/`, {
-            cache: 'no-store'
-        })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-                    
-                    mostrarSoma(resposta);
-                    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-            function mostrarSoma(resposta) {
-
-                Somaagilidade.innerHTML = resposta[0].agilidadaSoma
-                Somaintelecto.innerHTML = resposta[0].intelectoSoma
-                Somavigor.innerHTML = resposta[0].vigorSoma
-                Somapresenca.innerHTML = resposta[0].presencaSoma
-                Somaforca.innerHTML = resposta[0].forcaSoma
-            }
-
-// mostra a quantidade de usuarios diferentes ja fizeram login
-            fetch(`/analytics/listarUsuarios/`, {
-            cache: 'no-store'
-        })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-                    
-                    mostrarUsuarios(resposta);
-                    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-            function mostrarUsuarios(resposta) {
-
-                esseTanto.innerHTML = resposta[0].quantos
-
-            }
-
-// mostra a quantidade de acessos de usuarios deslogados
-            fetch(`/analytics/listarUsuariosUndefined/`, {
-            cache: 'no-store'
-        })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-                    
-                    mostrarUsuariosU(resposta);
-                    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-            function mostrarUsuariosU(resposta) {
-
-                esseTantoDeslogados.innerHTML = resposta[0].deslogados
-
-            }
-
-// para mostrar quantas fichas existem no banco de dados
-
-fetch(`/analytics/listarFichas/`, {
-            cache: 'no-store'
-        })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-                    
-                    mostrarFichas(resposta);
-                    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-            function mostrarFichas(resposta) {
-
-                quantasFichas.innerHTML = resposta[0].quantasFichas
-
-            }
-
-
-
+    // --------------------------------------------------------------------------------------------------------
     
+    function pegarDados() {
+        // esta função faz um select com a soma de todos os atributos registrados
+        fetch(`/analytics/listarSoma/`, {
+            cache: 'no-store'
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        guardarSoma(resposta); // após a resposta, vamos montar o gráfico abaixo
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+
+        // --------------------------------------------------------------------------------------------------------
 
 
+
+        // esta função monta o gráfico com a soma de cada atributo dentro da página de analytics
+        function guardarSoma(resposta) {
+
+            const ctx_atributos = document.getElementById('grafico_atributos');
+
+            new Chart(ctx_atributos, {
+                type: 'bar',
+                data: {
+                    labels: ['agilidade', 'intelecto', 'vigor', 'presença', 'força'],
+                    datasets: [{
+                        barThickness: 40,
+                        label: 'atributos',
+                        data: [resposta[0].agilidadeSoma, resposta[0].intelectoSoma, resposta[0].vigorSoma, resposta[0].presencaSoma, resposta[0].forcaSoma],
+                        borderWidth: 1,
+                        borderColor: 'rgb(51, 85, 0)',
+                        backgroundColor: ['rgb(255, 234, 114, 0.7)', 'rgba(114, 182, 255, 0.7)', 'rgba(199, 255, 114, 0.7)', 'rgba(184, 114, 255, 0.7)', 'rgba(255, 72, 85, 0.7)']
+
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                }
+            });
+
+        }
+
+        // --------------------------------------------------------------------------------------------------------
+
+        // esta função pega a quantidade de acessos nos últimos 7 dias
+        fetch(`/analytics/acessosDias/`, {
+            cache: 'no-store'
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        montarGrafico(resposta); // após a resposta, vamos montar o gráfico abaixo
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        // --------------------------------------------------------------------------------------------------------
+
+        // esta função monta o gráfico de linha comparando a quantidade de acessos nos últimos 7 dias
+        function montarGrafico(resposta) {
+
+            const ctx_semana = document.getElementById('grafico_semana');
+
+            new Chart(ctx_semana, {
+                type: 'line',
+                data: {
+                    labels: [resposta[0].data, resposta[1].data, resposta[2].data, resposta[3].data, resposta[4].data, resposta[5].data, resposta[6].data],
+                    datasets: [{
+                        barThickness: 40,
+                        label: 'quantidade de acessos',
+                        data: [resposta[0].quantos, resposta[1].quantos, resposta[2].quantos, resposta[3].quantos, resposta[4].quantos, resposta[5].quantos, resposta[6].quantos],
+                        borderWidth: 1,
+                        borderColor: 'rgb(51, 85, 0)',
+                        backgroundColor: ['rgb(255, 234, 114, 0.7)']
+
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                }
+            });
+        }
+
+        // --------------------------------------------------------------------------------------------------------
+
+        // mostra a quantidade de usuarios diferentes ja fizeram login estando logados em suas contas
+        fetch(`/analytics/listarUsuarios/`, {
+            cache: 'no-store'
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        mostrarUsuarios(resposta); // ao invés de montar o gráfico, vamos guardar a resposta dentro de uma váriavel
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        // --------------------------------------------------------------------------------------------------------
+
+
+        // esta função guarda a resposta dentro da váriavel para posterior consulta
+
+        function mostrarUsuarios(resposta) {
+            quantosUsuarios = resposta[0].quantos
+        }
+
+        // mostra a quantidade de acessos de usuarios deslogados
+        fetch(`/analytics/listarUsuariosUndefined/`, {
+            cache: 'no-store'
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        mostrarUsuariosU(resposta); // ao invés de montar o gráfico, vamos guardar a resposta dentro de uma váriavel
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        // --------------------------------------------------------------------------------------------------------
+
+        // esta função serve apenas para guardar a resposta dentro da váriavel, afinal o gráfico é feito de
+        // dois selects diferentes
+        function mostrarUsuariosU(resposta) {
+
+            quantosDeslogados = resposta[0].deslogados
+
+        }
+
+        // --------------------------------------------------------------------------------------------------------
+
+        // esta função lista a quantidade de fichas de todos os usuários dentro do site
+
+        fetch(`/analytics/listarFichas/`, {
+            cache: 'no-store'
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        mostrarFichas(resposta); // após pegar a informação, vamos plotar ela dentro do site
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        // --------------------------------------------------------------------------------------------------------
+
+        // esta função plota diretamente em um span a quantidade de fichas registradas no site
+        function mostrarFichas(resposta) {
+            qtdFichas.innerHTML = resposta[0].quantasFichas
+
+        
+        // uma vez que todos os dados foram pegos do banco, vamos montar um último gráfico
+        // contendo dois selects diferentes
+            mostrarAnalytics()
+        }
+
+        
+        // --------------------------------------------------------------------------------------------------------
+    }
+    
+    // --------------------------
+    // ---------CHARTS-----------
+    // --------------------------
+
+    // este gráfico foi colocado fora dos selects por conter dois selects diferentes
+    // ele mostra a quantidade de acessos totais, acessos por usuários cadastrados
+    // e usuários deslogados
+
+    function mostrarAnalytics() {
+
+        const ctx = document.getElementById('grafico_usuarios');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Total de acessos', 'Usuarios Cadastrados', 'Usuarios não cadastrados'],
+                datasets: [{
+                    barThickness: 40,
+                    data: [quantosUsuarios + quantosDeslogados, quantosUsuarios, quantosDeslogados],
+                    borderWidth: 1,
+                    borderColor: ['rgb(51, 85, 0)', 'rgb(0, 50, 100)', 'rgb(100, 00, 00)'],
+                    backgroundColor: ['rgba(156, 236, 35, 0.5)', 'rgba(114, 114, 255, 0.7)', 'rgba(255, 70, 70, 0.8)']
+
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                }
+
+            }
+        });
+    }
+    // --------------------------------------------------------------------------------------------------------
+    // fim
 
 </script>

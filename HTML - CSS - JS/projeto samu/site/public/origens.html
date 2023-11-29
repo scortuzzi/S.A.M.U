@@ -30,7 +30,7 @@
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
             
-            <div class="user"></div>
+            <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
         </div>
@@ -73,7 +73,7 @@
 
                     <div class="origens">
 
-                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="academico">
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Acadêmico">
                             <div class="origensBox">
                                 <span>Acadêmico</span>
                                 
@@ -84,7 +84,7 @@
                             </div>
                         </div>
 
-                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="agenteSaude">
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Agente da saúde">
                             <div class="origensBox">
                                 <span>Agente da saúde</span>
                                 
@@ -95,7 +95,7 @@
                             </div>
                         </div>
 
-                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="amnesico">
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Amnésico">
                             <div class="origensBox">
                                 <span>Amnésico</span>
                                 
@@ -107,7 +107,7 @@
                             </div>
                         </div>
 
-                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="artista">
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Artista">
                             <div class="origensBox">
                                 <span>Artista</span>
                                 
@@ -118,7 +118,7 @@
                             </div>
                         </div>
 
-                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="atleta">
+                        <div class="origemSelect" onclick="escolherOrigem(this.id)" id="Atleta">
                             <div class="origensBox">
                                 <span>Atleta</span>
                                 
@@ -209,6 +209,9 @@
         }
         else {
             nomeUsuario_span.innerHTML = nickUsuario
+            var pfp = document.getElementById('pfp_usuario')
+
+pfp.src = sessionStorage.PFP
         }
     }
 
