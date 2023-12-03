@@ -3,14 +3,16 @@ var router = express.Router();
 
 var insercaoController = require("../controllers/insercaoController");
 
-router.post("/cadastrar/", function (req, res) {
-    insercaoController.cadastrar(req, res);
+
+// esta função cadastra os 28 inserts dentro da tabela fichaPericia
+router.post("/inserindoPericias/", function (req, res) {
+    insercaoController.inserindoPericias(req, res);
 })
 
-router.post("/cadastrarOrigem/:origem/:ficha", function (req, res) {
-    insercaoController.cadastrarOrigem(req, res);
+// após inserirmos todas as perícias em fichaPericia, vamos fazer um update na perícia da origem escolhida
+router.post("/periciaOrigem/:origem", function (req, res) {
+    insercaoController.periciaOrigem(req, res);
 })
-
 
 
 router.get("/listar", function (req, res) {
@@ -21,9 +23,16 @@ router.get("/listarAtributos/:idFicha", function (req, res) {
     insercaoController.listarAtributos(req, res);
 });
 
-router.get("/listarOrigem/:origem", function (req, res) {
-    insercaoController.listarOrigem(req, res);
+router.delete("/deletarPericias/:idFicha", function (req, res) {
+    console.log('daora')
+    insercaoController.deletarPericias(req, res);
 });
+
+router.delete("/deletarFicha/:idFicha", function (req, res) {
+    console.log('daora')
+    insercaoController.deletarFicha(req, res);
+});
+
 
 
 module.exports = router;

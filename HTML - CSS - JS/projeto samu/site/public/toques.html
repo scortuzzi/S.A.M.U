@@ -272,7 +272,7 @@
 
         var origemVar = sessionStorage.origem;
 
-        fetch("/personagem/cadastrar", {
+        fetch("/personagem/cadastrarFicha", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -299,9 +299,11 @@
             }),
         })
 
-        insercao()
+        setTimeout(() => {
+            
+            insercao()
+        }, 500);
 
-    
 
 
         // ----------------------------------------------------------
@@ -310,32 +312,25 @@
         // esta função faz 28 inserts dentro da tabela fichaPericia, com cada uma pericia sendo setada como zero
         function insercao() {
 
-            fetch(`/insercao/cadastrar/`, {
+            fetch(`/insercao/inserindoPericias/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 }
             })
 
-
-        } updateOrigem()
-        // arruma aqui, o primeiro insert de todos na fichaPericias tem alguns indo como indefinido ????
-
-
-
-        //função para buscar a id da origem escolhida:
-
-
-
+        }
+        
+        setTimeout(() => {
+            updateOrigem()
+        }, 1000);
         
         
-        
-        
-        
+        // esta função faz um update para aumentar o valor da perícia com base na origem escolhida
         function updateOrigem() {
             var origem = sessionStorage.origem;
 
-            fetch(`/insercao/cadastrarOrigem/${resposta[0].fkPericia}/${idFicha}`, {
+            fetch(`/insercao/periciaOrigem/${origem}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -366,28 +361,5 @@
 
         classeSelecionada.style.border = '2px greenyellow solid'
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>

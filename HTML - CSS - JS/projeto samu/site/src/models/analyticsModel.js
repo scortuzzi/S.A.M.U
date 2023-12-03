@@ -7,13 +7,13 @@ var database = require("../database/config")
 
 function listarSoma() {
     var instrucao = `
-    select 
-	    sum(agilidade) agilidadeSoma,
-        sum(inteligencia) intelectoSoma,
-        sum(presenca) presencaSoma,
-        sum(vigor) vigorSoma,
-        sum(forca) forcaSoma
-    from ficha;
+        select 
+            sum(agilidade) agilidadeSoma,
+            sum(inteligencia) intelectoSoma,
+            sum(presenca) presencaSoma,
+            sum(vigor) vigorSoma,
+            sum(forca) forcaSoma
+        from ficha;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

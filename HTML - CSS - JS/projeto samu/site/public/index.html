@@ -18,8 +18,7 @@
     <header class="displaySpace identidade">
 
         <div>
-            <h1>S.A.M.U</h1>
-            <span><a href="analytics.html">analytics</a></span>
+            <h1><a href="analytics.html">S.A.M.U</a></h1>
         </div>
 
         <div class="botoes displaySpace">
@@ -34,6 +33,7 @@
 
             <img class="user" id="pfp_usuario" src="" alt="">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
+            <span id="span_sair"></span>
         </div>
 
         </div>
@@ -322,6 +322,10 @@
 
             linkAtributos.href = 'atributos.html'
             linkFichas.href = 'fichas.html'
+
+            span_sair.innerHTML = `
+            <span style="cursor: pointer;" onclick="sairSessao()">sair</span>
+            `
         }
 
     }
@@ -334,6 +338,15 @@
         "Content-Type": "application/json",
       }
     })
+  }
+
+  function sairSessao() {
+
+    window.sessionStorage.clear()
+
+    window.location.href = "login.html"
+
+
   }
 
 

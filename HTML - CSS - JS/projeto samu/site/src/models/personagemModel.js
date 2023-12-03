@@ -31,7 +31,7 @@ function listar(id) {
 
 
 
-function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem, vida, san, pe, imagem) {
+function cadastrarFicha(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem, vida, san, pe, imagem) {
     var instrucao = `
     insert into ficha (nomePersonagem, fkUsuario, agilidade, inteligencia, vigor, presenca, forca, classe, fkOrigem, vida, sanidade, pe, imagemPersonagem) values
     
@@ -43,6 +43,6 @@ function cadastrar(nomePersonagem, id, agi, int, vig, pre, forc, classe, origem,
 
 
 module.exports = {
-    cadastrar,
+    cadastrarFicha,
     listar
 };

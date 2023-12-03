@@ -26,7 +26,7 @@
 
             <img src="assets/img/logo.png" alt="ilustração de iceberg" id="logo">
 
-            <img class="user" id="pfp_usuario" src="" alt="">
+            <img class="user" id="pfp_usuario" src="" alt="" onerror="this.style.display='none'">
             <span style="font-size: 15px; margin-left: -30px;" id="nomeUsuario_span"></span>
 
         </div>
@@ -35,7 +35,7 @@
 
     <!-- fim da header -->
 
-    <div class="flexivel">
+    <div class="flexivel" id="fichasPag">
 
         <div class="fichas" id="cards_div">
 
@@ -47,7 +47,7 @@
     </div>
 
 
-    <footer class="identidade trindade" style="margin-top: 300px;">
+    <footer class="identidade trindade" id="footerFichas">
 
         <div>
             <h1 class="underline">S.A.M.U</h1>
@@ -167,7 +167,7 @@ function validarSessao() {
 
 
                     <div class="displaySpace" style="padding: 0px 20px;">
-                        <span style="color: red; font-weight: bold;" onclick="removerFicha(this.id)">remover</span>
+                        <span style="color: red; font-weight: bold; cursor: pointer;" onclick="removerFicha()">remover</span>
                         <a href="fichaPersonagem.html"><button>Ficha</button></a>
                     </div>
 
@@ -179,6 +179,10 @@ function validarSessao() {
             }
         }
     }
+
+    // o card inteiro possui essa função, ao clicar no botão de ficha você
+    // instantâneamente também armazena no sessionStorage o id da ficha selecionada
+    // para posterior consulta na tela de ficha individual
     function escolherFicha(id) {
 
         console.log(id)
@@ -187,20 +191,42 @@ function validarSessao() {
 
 
 
-    function removerFicha(id) {
+
+
+        function removerFicha() {
 
         // primero, a remoção dos valores que contém a fk da ficha
-        fetch(`/insercao/cadastrarOrigem/`, {
-            method: "POST",
+        fetch(`/insercao/deletarPericias/${sessionStorage.FICHA}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+
+        })
+        deletarFicha()
+    }
+
+    function deletarFicha() {
+
+        fetch(`/insercao/deletarFicha/${sessionStorage.FICHA}`, {
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
             }
         })
+        // window.location.reload()
+        cards_div.innerHTML = ``
 
-
-
-
+        setTimeout(() => {
+            
+            trazerFicha()
+        }, 500);
 
     }
+
+
+
+
+
 
 </script>

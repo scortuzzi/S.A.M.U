@@ -16,15 +16,7 @@ function listarAtributos(idFicha) {
     return database.executar(instrucao);
 }
 
-function listarOrigem(origem) {
-    var instrucao = `
-    select fkPericia from origem where nomeOrigem = '${origem}';
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
-
-function cadastrar() {
+function inserindoPericias() {
     var instrucao = `
     insert into fichaPericia values 
     ((select idFicha from ficha order by idFIcha desc limit 1), 100, 0),
@@ -61,19 +53,41 @@ function cadastrar() {
 }
 
 // esta função atualiza o valor da pericia dependendo da origem escolhida
-function cadastrarOrigem(origem) {
+function periciaOrigem(origem) {
     var instrucao = `
-        update fichaPericia set valor = 5 where fkFicha = (select idFicha from ficha order by idFIcha desc limit 1) and fkPericia = ${origem};
+        update fichaPericia set valor = 5 where fkFicha = (select idFicha from ficha order by idFIcha desc limit 1) and fkPericia = (select fkPericia from origem where nomeOrigem = '${origem}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
+// esta função atualiza o valor da pericia dependendo da origem escolhida
+function deletandoFKpericia(ficha) {
+    var instrucao = `
+        delete from fichaPericia where fkFicha = ${ficha};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function deletarFicha(ficha) {
+    var instrucao = `
+    delete from ficha where idFicha = ${ficha};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+
 
 module.exports = {
-    cadastrar,
-    cadastrarOrigem,
+    inserindoPericias,
+    periciaOrigem,
     listarAtributos,
-    listarOrigem,
-    listar
+    listar,
+    deletandoFKpericia,
+    deletarFicha
 };

@@ -323,12 +323,10 @@
         }
     }
 
-    // daqui para baixo nós vamos buscar os valores das perícias dentro do banco apartir da tabela fichaPericia, 
-    // se não houver nenhum dado inserido nela, o sistema exibe o valor como 0, se ja houver, o sistema
-    // o exibe ao lado de sua respectiva perícia
+    // a partir daqui nós vamos fazer um select que exibe todos os nossos valores
+    // entre o relacionamento das perícias com a ficha escolhida, para saber exatamente~
+    // qual o valor de cada perícia individual
 
-
-    // passo 1, buscar valor por valor
     fetch(`/valores/listar/${idFichaVar}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
@@ -340,12 +338,11 @@
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
-            // exibirvalores(resposta);
+
         }
     })
 
-
-    // passo 2, exibir o valor encontrado
+    // passo 2, exibir os valores encontrado
     function exibirvalores(resposta) {
 
         var i = 0;
@@ -368,11 +365,7 @@
             i += 1;
 
         }
-
-
     }
-
-
 
     //uma função para receber o nome de todas as perícias
     function listarPericias() {
@@ -506,10 +499,6 @@
         var atributo = document.getElementsByClassName("atributobase")[atributoParametro].innerHTML
         var pericia = document.getElementsByClassName("periciaNome")[atributoParametro].innerHTML
 
-        // console.log(parseInt(Math.random() * 20 + 1 + Number(periciaValor.value)))
-
-        console.log(atributo)
-        console.log(atributoParametro)
         var qtdDados = 1;
         var eh0 = false;
 

@@ -7,6 +7,8 @@
     align-items: center;
 }
 
+
+
 body {
     margin: 0;
     font-family: 'Lexend Exa', sans-serif;
@@ -370,3 +372,8 @@ ul {
 
 
 
+#fichasPag {
+
+    height: 700px;
+
+}

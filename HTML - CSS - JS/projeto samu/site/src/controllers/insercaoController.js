@@ -24,35 +24,46 @@ function listarAtributos(req, res) {
     })
 }
 
-function listarOrigem(req, res) {
+function inserindoPericias(req, res) {
 
-    var origem = req.params.origem
-    
-    
-    insercaoModel.listarOrigem(origem).then(function(resultado){
-    
-        res.status(200).json(resultado);
+    insercaoModel.inserindoPericias().then(function(resposta){
+        res.status(200).send("perícias inseridas com sucesso");
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
     })
 }
 
-function cadastrar(req, res) {
-
-    insercaoModel.cadastrar().then(function(resposta){
-        res.status(200).send("Carro criado com sucesso");
-    }).catch(function(erro){
-        res.status(500).json(erro.sqlMessage);
-    })
-}
-
-function cadastrarOrigem(req, res) {
+function periciaOrigem(req, res) {
 
     var origem = req.params.origem
 
 
-    insercaoModel.cadastrarOrigem(origem).then(function(resposta){
+    insercaoModel.periciaOrigem(origem).then(function(resposta){
         res.status(200).send("origem atualizada com sucesso");
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function deletarPericias(req, res) {
+
+    var ficha = req.params.idFicha
+
+
+    insercaoModel.deletandoFKpericia(ficha).then(function(resposta){
+        res.status(200).send("perícia deletada com sucesso");
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function deletarFicha(req, res) {
+
+    var ficha = req.params.idFicha
+
+
+    insercaoModel.deletarFicha(ficha).then(function(resposta){
+        res.status(200).send("ficha deletada com sucesso");
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
     })
@@ -62,7 +73,8 @@ function cadastrarOrigem(req, res) {
 module.exports = {
     listar,
     listarAtributos,
-    listarOrigem,
-    cadastrarOrigem,
-    cadastrar
+    periciaOrigem,
+    inserindoPericias,
+    deletarPericias,
+    deletarFicha
 }
